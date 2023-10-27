@@ -1,0 +1,207 @@
+.slider-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 6fr;
+  width: 100%;
+  justify-items: center;
+  background-color: $main-color;
+  z-index: 1;
+  max-width: 1024px;
+}
+.slider-section__title {
+  font-size: 20px;
+  color: $text-additional;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.slider-section__videos {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 6fr 2fr;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  width: 90vw;
+  div {
+    height: 100%;
+  }
+  .slick-list {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+  .slick-prev {
+    justify-self: center;
+    align-self: center;
+    position: relative;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    top: auto;
+    left: auto;
+    right: auto;
+    justify-self: center;
+    z-index: 999;
+    transform: translate(0, 0) !important;
+    &::before {
+      justify-self: center;
+      align-self: center;
+      font-size: 30px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+  .slick-next {
+    position: relative;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    top: auto;
+    left: auto;
+    right: auto;
+    justify-self: center;
+    z-index: 999;
+    transform: translate(0, 0) !important;
+    &::before {
+      font-size: 30px;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+  .slick-dots {
+    bottom: auto;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+  .slick-dots li button:before {
+    font-size: 6px;
+  }
+}
+.slider-section__video {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+}
+
+@media (min-width: 768px) and (max-width: 1365px) {
+  .slider-section {
+    grid-template-rows: 1fr 8fr;
+    padding: 20px;
+  }
+  .slider-section__videos {
+    grid-template-rows: 8fr 1fr;
+    align-items: center;
+    gap: 30px;
+    grid-row-start: auto;
+    grid-row-end: auto;
+    width: 100%;
+  }
+  .slick-prev {
+    &::before {
+      font-size: 40px;
+    }
+  }
+  .slick-next {
+    &::before {
+      font-size: 40px;
+    }
+  }
+  .slider-section__title {
+    font-size: 20px;
+    padding-bottom: 20px;
+  }
+}
+@media (min-width: 1366px) and (max-width: 1600px) {
+  .slider-section {
+    grid-template-rows: 1fr 5fr;
+    padding: 0;
+    max-width: 1280px;
+    padding-bottom: 20px;
+  }
+  .slider-section__videos {
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 4fr 0.5fr;
+    align-items: center;
+    width: 100%;
+    .slick-prev {
+      grid-row-start: 1;
+      grid-column-start: 1;
+      &::before {
+        font-size: 80px;
+      }
+    }
+    .slick-next {
+      grid-row-start: 1;
+      grid-column-start: 3;
+      &::before {
+        font-size: 80px;
+      }
+    }
+    .slick-dots {
+      grid-row-start: 2;
+      grid-column-start: 2;
+    }
+    .slick-dots li button:before {
+      font-size: 14px;
+    }
+    .slick-list {
+      grid-column-start: 2;
+    }
+  }
+  .slider-section__title {
+    font-size: 24px;
+    padding-bottom: 30px;
+    padding-top: 50px;
+  }
+}
+@media (min-width: 1600px) and (max-width: 100vw) {
+  .slider-section {
+    grid-template-rows: 1fr 6fr;
+    padding: 0;
+    max-width: 1280px;
+  }
+  .slider-section__videos {
+    grid-template-columns: 1fr 7fr 1fr;
+    grid-template-rows: 2fr 0.5fr;
+    align-items: center;
+    width: 100%;
+    .slick-prev {
+      grid-row-start: 1;
+      grid-column-start: 1;
+      &::before {
+        font-size: 80px;
+        left: -30px;
+      }
+    }
+    .slick-next {
+      grid-row-start: 1;
+      grid-column-start: 3;
+      &::before {
+        font-size: 80px;
+        right: -30px;
+      }
+    }
+    .slick-dots {
+      grid-row-start: 2;
+      grid-column-start: 2;
+    }
+    .slick-dots li button:before {
+      font-size: 14px;
+    }
+    .slick-list {
+      grid-column-start: 2;
+    }
+  }
+  .slider-section__title {
+    font-size: 32px;
+    padding-bottom: 30px;
+    padding-top: 50px;
+  }
+}
