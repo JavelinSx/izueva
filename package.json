@@ -1,7 +1,7 @@
 {
   "homepage": "",
   "name": "izueva",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -13,11 +13,8 @@
     "@types/react-dom": "^18.2.11",
     "@types/react-select": "^5.0.1",
     "@types/swiper": "^6.0.0",
-    "bootstrap": "^5.3.2",
-    "bootstrap-icons": "^1.11.1",
     "mdb-react-ui-kit": "^6.3.0",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
     "react-id-swiper": "^4.0.0",
@@ -25,8 +22,7 @@
     "react-slick": "^0.29.0",
     "sass": "^1.69.0",
     "slick-carousel": "^1.8.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "typescript": "^4.9.5"
   },
   "scripts": {
     "predeploy": "npm run build",

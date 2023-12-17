@@ -8,33 +8,57 @@ const MapSection: FC<MapSectionProps> = () => {
       <section className='map' id='contact-section'>
         <div className='map-wrapper-info'>
           <h2 className='map-title'>КОНТАКТЫ</h2>
-          <h5 className='map-vk'>
-            Вступайте в нашу группу ВКОНАКТЕ. Там вы можете получить актуальную информацию по акциям и скидкам, а так же
-            принять участкие в розыгрышах или проконсультироваться по предоставляемым услугам.
-          </h5>
-          <button className='map-vk-button'>
-            <a href='https://vk.com/keratin_botox_plessvk' target='_blank' rel='noreferrer'>
-              Вступить в группу
+          <h5 className='map-info'>Я работю в Савинске и Плесецке</h5>
+          <h5 className='map-telefon'>
+            Телефон:{' '}
+            <a className='map-telefon-link' href='tel:89021962407'>
+              89021962407
             </a>
-          </button>
-          <h5 className='map-info'>Мы работаем в Савинске и Плесецке</h5>
-          <h5 className='map-telefon'>Телефон: 89021962407</h5>
+          </h5>
         </div>
         <div className='map-savinsk'>
-          <h5 className='map-city-info'>Адрес Савинский: ул. Октябрьская 10, кв.61</h5>
-          <iframe
-            title='savinsk'
-            className='map-frame'
-            src='https://yandex.ru/map-widget/v1/?um=constructor%3A5e2e69dcadb54d1c1a570f9d21824c169f4f7bb613f4316a7877409ddfce32bc&amp;source=constructor'
-          ></iframe>
+          <h5 className='map-city-info'>
+            <span>Адрес Савинский: </span>
+            <span>ул. Октябрьская 10, кв.61</span>
+          </h5>
+          <button className='map-button'>
+            <a href='https://yandex.ru/maps/-/CDatzT89' className='map-button-link' target='_blank' rel='noreferrer'>
+              Открыть карту
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='16'
+                height='16'
+                fill='currentColor'
+                className='bi bi-geo-alt map-geo'
+                viewBox='0 0 16 16'
+              >
+                <path d='M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z' />
+                <path d='M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z' />
+              </svg>
+            </a>
+          </button>
         </div>
         <div className='map-pleseck'>
-          <h5 className='map-city-info'>Адрес Плесецк: ул. Кооперативная, 4Б, ТЦ 'ГАРАНТ'</h5>
-          <iframe
-            title='pleseck'
-            className='map-frame'
-            src='https://yandex.ru/map-widget/v1/?um=constructor%3A7e92ff7f018efc88420a12e417d9e056dafca2907018042f010017bead07673a&amp;source=constructor'
-          ></iframe>
+          <h5 className='map-city-info'>
+            <span>Адрес Плесецк: </span>
+            <span>ул. Кооперативная, 4Б, ТЦ 'ГАРАНТ', 3 этаж, офис 21</span>
+          </h5>
+          <button className='map-button'>
+            <a href='https://yandex.ru/maps/-/CDatzO6o' className='map-button-link' target='_blank' rel='noreferrer'>
+              Открыть карту
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='16'
+                height='16'
+                fill='currentColor'
+                className='bi bi-geo-alt map-geo'
+                viewBox='0 0 16 16'
+              >
+                <path d='M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z' />
+                <path d='M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z' />
+              </svg>
+            </a>
+          </button>
         </div>
       </section>
     </div>

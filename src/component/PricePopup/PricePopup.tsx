@@ -12,12 +12,15 @@ const PricePopup: FC<PricePopupProps> = ({ item, closePopup }) => {
   const handleClick = () => {
     closePopup();
   };
+  const moveToCalculator = () => {
+    closePopup();
+  };
 
   return (
     <>
       <div className='price-popup'>
         <div className='price-popup__img-wrapper'>
-          <img className='price-popup__img' src={imgSrc} alt=''></img>
+          <img className='price-popup__img' loading='lazy' src={imgSrc} alt=''></img>
           <div className='price-popup__img-background'></div>
         </div>
 
@@ -44,6 +47,9 @@ const PricePopup: FC<PricePopupProps> = ({ item, closePopup }) => {
             })}
           </ul>
           <div className='price-popup__price'>{priceText}</div>
+          <button className='price-popup__calculator' onClick={moveToCalculator}>
+            <a href='#calculator-section'>Кальлкулятор</a>
+          </button>
         </div>
         <button className='price-popup__button-close' onClick={handleClick}>
           <span></span>

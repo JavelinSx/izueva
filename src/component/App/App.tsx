@@ -1,15 +1,15 @@
 import type { FC } from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import MainSection from '../MainSection/MainSection';
-import Footer from '../Footer/Footer';
 import SliderSection from '../SliderSection/SliderSection';
 import PriceSection from '../PriceSection/PriceSection';
-import AboutSection from '../AboutSection/AboutSection';
 import Header from '../Header/Header';
 import MainSectionAbout from '../MainSectionAbout/MainSectionAbout';
 import PricePopup from '../PricePopup/PricePopup';
 import PriceCalculator from '../PriceCalculator/PriceCalculator';
 import MapSection from '../MapSection/MapSection';
+import StudioSection from '../StudioSection/StudioSection';
+import Action from '../Action/Action';
 
 interface AppProps {}
 
@@ -33,12 +33,13 @@ const App: FC<AppProps> = () => {
     <div className='app'>
       <Header></Header>
       <MainSection></MainSection>
-      <SliderSection></SliderSection>
       <MainSectionAbout></MainSectionAbout>
+      <SliderSection></SliderSection>
       <PriceSection popupIsOpen={handlePopupOpen} setPopupItem={setPopupItem}></PriceSection>
       <PriceCalculator></PriceCalculator>
+      <StudioSection></StudioSection>
+      <Action></Action>
       <MapSection></MapSection>
-      <Footer></Footer>
       {openPopup ? <PricePopup item={popupItem} closePopup={handlePopupClose}></PricePopup> : null}
     </div>
   );

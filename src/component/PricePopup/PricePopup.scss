@@ -10,6 +10,7 @@
   opacity: 1;
 }
 .price-popup {
+  box-sizing: border-box;
   position: fixed;
   top: 0;
   left: 0;
@@ -28,12 +29,12 @@
   grid-column-start: 1;
   border-radius: 1rem;
   background-color: $main-color;
-  opacity: 0.5;
+  opacity: 0.4;
   width: 100%;
 }
 .price-popup__img {
   width: 100%;
-  height: 150px;
+  height: 120px;
   object-fit: cover;
   border-radius: 1rem;
   position: relative;
@@ -54,6 +55,7 @@
 }
 .price-popup__description {
   text-align: justify;
+  font-size: 14px;
 }
 .price-popup__consist {
   list-style: disc;
@@ -77,6 +79,7 @@
   margin: 10px;
   width: 30px;
   height: 30px;
+  min-height: 30px;
   transition: 0.25s ease-in-out;
   border: 2px solid $text-additional;
   border-radius: 10px;
@@ -116,6 +119,19 @@
     &:nth-child(2) {
       transform: rotate(-45deg);
     }
+  }
+}
+.price-popup__calculator {
+  color: $text-additional;
+  border: 1px solid $text-additional;
+  border-radius: 1rem;
+  width: 100%;
+  background-color: inherit;
+  transition: 0.3s;
+  font-size: 16px;
+  &:hover {
+    background-color: $text-additional;
+    color: $main-color;
   }
 }
 @media (min-width: 768px) and (max-width: 1365px) {
@@ -174,6 +190,6 @@
     gap: 15px;
   }
   .price-popup__description {
-    font-size: 28px;
+    font-size: 24px;
   }
 }

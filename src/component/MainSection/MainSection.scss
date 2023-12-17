@@ -1,15 +1,16 @@
 .main-section {
+  box-sizing: border-box;
   max-width: 1024px;
   position: relative;
-  background-color: #5c5552;
-  width: 100%;
+  background-color: $main-color;
+  width: 90%;
   display: grid;
   justify-items: center;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: repeat(2, auto);
   gap: 10px;
   padding: 10px;
-  padding-top: 60px;
+  padding-top: 70px;
   padding-bottom: 20px;
 }
 .main-section__title {
@@ -20,13 +21,51 @@
   justify-self: center;
   text-align: center;
 }
+.main-setcion__button-more {
+  grid-row: span 1;
+  grid-column: span 3;
+  z-index: 9;
+  border: 2px solid $text-additional;
+  border-radius: 0.7rem;
+  color: $text-additional;
+  background-color: inherit;
+  width: 100%;
+  align-self: flex-end;
+  justify-self: flex-end;
+  transition: 0.3s;
+  height: 40px;
+  font-size: 16px;
+  &:hover {
+    background-color: $text-additional;
+    color: $main-color;
+  }
+}
+.main-section__button-rollup {
+  grid-row: span 1;
+  grid-column: span 3;
+  z-index: 9;
+  border: 2px solid $text-additional;
+  border-radius: 0.7rem;
+  color: $text-additional;
+  background-color: inherit;
+  width: 100%;
+  align-self: flex-end;
+  justify-self: flex-end;
+  transition: 0.3s;
+  font-size: 16px;
+  &:hover {
+    background-color: $text-additional;
+    color: $main-color;
+  }
+}
 
 @media (min-width: 768px) and (max-width: 1365px) {
   .main-section {
     width: 100%;
     padding: 70px;
+    padding-bottom: 20px;
     padding-top: 120px;
-    gap: 50px;
+    gap: 15px;
     display: grid;
     justify-items: center;
     align-items: center;
@@ -40,10 +79,16 @@
     font-size: 32px;
     width: 150px;
   }
+  .main-setcion__button-more {
+    font-size: 20px;
+  }
+  .main-section__button-rollup {
+    font-size: 20px;
+  }
 }
 @media (min-width: 1366px) and (max-width: 1600px) {
   .main-section {
-    width: 100%;
+    width: 70%;
     padding: 70px;
     padding-top: 125px;
     gap: 30px;
@@ -72,11 +117,19 @@
     grid-column-end: 2;
     gap: 70px;
   }
+  .main-setcion__button-more {
+    font-size: 24px;
+    margin-bottom: -15px;
+    height: 50px;
+  }
+  .main-section__button-rollup {
+    font-size: 24px;
+  }
 }
 @media (min-width: 1600px) and (max-width: 100vw) {
   .main-section {
     max-width: 1280px;
-    width: 100%;
+    width: 60%;
     padding: 70px;
     padding-top: 125px;
     gap: 50px;
@@ -92,5 +145,13 @@
   .main-section__title {
     font-size: 32px;
     width: 150px;
+  }
+  .main-setcion__button-more {
+    font-size: 28px;
+    margin-bottom: -30px;
+    height: 60px;
+  }
+  .main-section__button-rollup {
+    font-size: 28px;
   }
 }

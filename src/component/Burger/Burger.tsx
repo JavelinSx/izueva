@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useState, useEffect } from 'react';
-import { MDBContainer, MDBCollapse, MDBNavbar, MDBNavbarToggler, MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
+import { MDBContainer, MDBNavbar, MDBNavbarToggler } from 'mdb-react-ui-kit';
 import LinkBurger from '../LinkBurger/LinkBurger';
 interface BurgerProps {}
 
@@ -22,7 +22,7 @@ const Burger: FC<BurgerProps> = () => {
         <MDBContainer fluid>
           <MDBNavbarToggler
             type='button'
-            className='first-button ms-auto'
+            className='burger-button'
             data-target='#navbarToggleExternalContent'
             aria-controls='navbarToggleExternalContent'
             aria-expanded='false'
@@ -38,10 +38,10 @@ const Burger: FC<BurgerProps> = () => {
         </MDBContainer>
       </MDBNavbar>
 
-      <MDBCollapse show={showAnimated}>
-        <ul className='collapse-menu shadow-3 p-4'>
+      <div className={`collapse ${showAnimated ? 'collapse-show' : 'collapse-hide'}`}>
+        <ul className='collapse-menu'>
           <li className={`collapse-menu__item ${showAnimated ? 'animated-item' : 'collapse-menu__item-hide'}`}>
-            <LinkBurger text='О СТУДИИ' anchor='#main-section' offset={-50} stateBurger={handleBurger}></LinkBurger>
+            <LinkBurger text='О СТУДИИ' anchor='#studio-section' offset={-50} stateBurger={handleBurger}></LinkBurger>
           </li>
           <li className={`collapse-menu__item ${showAnimated ? 'animated-item' : 'collapse-menu__item-hide'}`}>
             <LinkBurger text='ОЗОР РАБОТ' anchor='#view-section' offset={-50} stateBurger={handleBurger}></LinkBurger>
@@ -50,7 +50,7 @@ const Burger: FC<BurgerProps> = () => {
             <LinkBurger text='ПРАЙС' anchor='#price-section' offset={-50} stateBurger={handleBurger}></LinkBurger>
           </li>
           <li className={`collapse-menu__item ${showAnimated ? 'animated-item' : 'collapse-menu__item-hide'}`}>
-            <LinkBurger text='АКЦИИ' anchor='#stocks-section' offset={-50} stateBurger={handleBurger}></LinkBurger>
+            <LinkBurger text='АКЦИИ' anchor='#action-section' offset={-50} stateBurger={handleBurger}></LinkBurger>
           </li>
           <li className={`collapse-menu__item ${showAnimated ? 'animated-item' : 'collapse-menu__item-hide'}`}>
             <LinkBurger
@@ -63,8 +63,15 @@ const Burger: FC<BurgerProps> = () => {
           <li className={`collapse-menu__item ${showAnimated ? 'animated-item' : 'collapse-menu__item-hide'}`}>
             <LinkBurger text='КОНТАКТЫ' anchor='#contact-section' offset={-50} stateBurger={handleBurger}></LinkBurger>
           </li>
+          <li className={`collapse-menu__item ${showAnimated ? 'animated-item' : 'collapse-menu__item-hide'}`}>
+            <button className='map-vk-button fixed-button'>
+              <a href='https://vk.com/keratin_botox_plessvk' target='_blank' rel='noreferrer'>
+                Группа в VK
+              </a>
+            </button>
+          </li>
         </ul>
-      </MDBCollapse>
+      </div>
     </div>
   );
 };

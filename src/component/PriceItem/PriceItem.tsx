@@ -15,7 +15,7 @@ const PriceItem: FC<PriceItemProps> = ({ title, imgSrc, price, openPopup }) => {
   return (
     <>
       <div className='price-item'>
-        <img className='price-item__img' src={imgSrc} alt=''></img>
+        <img className='price-item__img' loading='lazy' src={imgSrc} alt=''></img>
         <div className='price-item__wrapper-info'>
           <h5 className='price-item__title'>{title}</h5>
           <div className='price-item__wrapper-description'>

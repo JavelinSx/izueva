@@ -226,19 +226,17 @@ const PriceCalculator: FC<PriceCalculatorProps> = () => {
       <section className='price-calculator' id='calculator-section'>
         <h2 className='price-calculator__title'>ПРИМЕРНЫЙ РАСЧЁТ СТОИМОСТИ УСЛУГ</h2>
         <h5 className='price-calculator__info'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero id, beatae molestias porro, natus odit harum
-          sequi consectetur quisquam architecto, mollitia dolore. Quasi explicabo iste error sit vel doloremque commodi
-          sequi tempore repellendus, tempora, libero rem quaerat, quibusdam accusantium nulla facere ut fugiat. Harum
-          alias nam autem possimus quibusdam molestiae.
+          Расчёт в калькуляторе - примерный. Точную стоимость можно узнать после очной коснультации.
         </h5>
         <label className='price-calculator-label'>Выберите услугу: </label>
         <div className='price-calculator__input' onClick={handleOpen}>
-          {selectedLabel}
+          <span className='price-calculator__span'>{selectedLabel}</span>
         </div>
         <ul className={isOpen ? 'price-calculator__list price-calculator-open' : 'price-calculator__list'}>
-          {options.map((item) => {
+          {options.map((item, index) => {
             return (
               <li
+                key={index}
                 className={
                   item.label === selectedLabel
                     ? 'price-calculator__item price-calculator__item-active'

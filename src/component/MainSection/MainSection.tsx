@@ -1,25 +1,39 @@
 import type { FC } from 'react';
-import { useState } from 'react';
-
-import slide1 from '../../img/slides/slide1.jpg';
-import slide2 from '../../img/slides/slide2.jpg';
-import slide3 from '../../img/slides/slide3.jpg';
-import slide4 from '../../img/slides/slide4.jpg';
-import slide5 from '../../img/slides/slide5.jpg';
-
+import { useEffect, useState } from 'react';
+import { imageSlidesMin } from '../../utils/utils';
 import MainImageWithPopup from '../MainImageWithPopup/MainImageWithPopup';
 import SwiperMain from '../SwiperMain/SwiperMain';
 
 interface MainSectionProps {}
 
 const MainSection: FC<MainSectionProps> = () => {
-  const [imgData] = useState([slide1, slide2, slide3, slide4, slide5]);
   const [selectedImg, setSelectedImg] = useState(0);
   const [open, setOpen] = useState(false);
+  const [lengthGallery, setLengthGallery] = useState(5);
+  const [gallery, setGallery] = useState(['']);
+  const [stateButtonRollup, setStateButtonRollup] = useState(false);
+  const [stateButtonMore, setStateButtonMore] = useState(true);
+
+  useEffect(() => {
+    setGallery(imageSlidesMin.slice(0, lengthGallery));
+    if (lengthGallery >= imageSlidesMin.length) {
+      setStateButtonMore(!stateButtonMore);
+    }
+  }, [lengthGallery]);
 
   const handlerOpenImg = (index: number) => {
     setSelectedImg(index + 1);
     setOpen(true);
+  };
+
+  const handleMoreImage = () => {
+    setLengthGallery(lengthGallery + 3);
+    setStateButtonRollup(true);
+  };
+  const handleRollUp = () => {
+    setLengthGallery(5);
+    setStateButtonRollup(false);
+    setStateButtonMore(true);
   };
 
   const handleClose = () => {
@@ -30,14 +44,26 @@ const MainSection: FC<MainSectionProps> = () => {
     <div className='wrapper-dark'>
       <section className='main-section' id='view-section'>
         <h2 className='main-section__title'>РАБОТЫ МАСТЕРА</h2>
-        {imgData.map((imgItem, index) => (
+        {gallery.map((imgLink, index) => (
           <MainImageWithPopup
-            imagePath={imgItem}
+            imagePath={imgLink}
             alt={''}
             key={index}
             isOpen={() => handlerOpenImg(index)}
           ></MainImageWithPopup>
         ))}
+        {stateButtonMore ? (
+          <button className='main-setcion__button-more' onClick={handleMoreImage}>
+            Показать ещё
+          </button>
+        ) : null}
+
+        {stateButtonRollup ? (
+          <button className='main-section__button-rollup' onClick={handleRollUp}>
+            Свернуть
+          </button>
+        ) : null}
+
         <SwiperMain startSlide={selectedImg} open={open} close={handleClose}></SwiperMain>
       </section>
     </div>

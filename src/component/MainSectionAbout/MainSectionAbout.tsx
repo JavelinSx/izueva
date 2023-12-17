@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import masterPhoto from '../../img/master-photo.webp';
+import { masterImgPath } from '../../utils/utils';
 import MainImage from '../MainImage/MainImage';
 interface MainSectionAboutProps {}
 
@@ -7,19 +7,16 @@ const MainSectionAbout: FC<MainSectionAboutProps> = () => {
   return (
     <div className='wrapper-white'>
       <section className='main-section__about' id='master-section'>
-        <MainImage imagePath={masterPhoto} alt='' classVariative='main-section__master-img'></MainImage>
+        <MainImage imagePath={masterImgPath} alt='' classVariative='main-section__master-img'></MainImage>
 
-        <h3 className='main-section__info-title'>НЕМНОГО ОБО МНЕ</h3>
+        <h3 className='main-section__info-title'>ВАШ МАСТЕР</h3>
 
         <h4 className='main-section__info-text'>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore deserunt beatae perspiciatis quia aliquam.
-          Nisi sint eligendi cumque consequatur perspiciatis? Similique, aliquam enim. Dolorum quidem mollitia quasi
-          eveniet vel perferendis fugit eius perspiciatis cupiditate excepturi explicabo veniam aperiam est qui adipisci
-          ad sunt tempore, ipsam error? Reprehenderit distinctio eligendi tempore. Possimus ipsa aperiam suscipit eaque
-          nisi, sit similique eos odio nobis fugit illo necessitatibus voluptatum, sequi voluptatibus quaerat provident
-          molestiae quos ipsum earum veritatis ab minus animi! Provident maiores ipsam officiis? Impedit earum,
-          consequatur, cumque est ad quis illum nihil cum explicabo reprehenderit recusandae, obcaecati et? Fuga laborum
-          commodi autem.
+          Давайте познакомимся! Меня зовут Ирина. Приглашаю вас в мир красивых волос. Я являюсь сертифицированным
+          мастером по реконструкции и восстановлению волос. После обучения постоянно повышаю свою квалификацию,
+          совершенствую навыки и осваиваю новые технологии работы. В моей студии комфортно и уютно. Работаю на
+          оригинальных составах премиум класса. У меня индивидуальный подход. Я подберу процедуру именно для ваших
+          волос, учту все пожелания. Я знаю, ваши волосы - ваше богатство. Жду тебя в гости за красивыми волосами!
         </h4>
       </section>
     </div>

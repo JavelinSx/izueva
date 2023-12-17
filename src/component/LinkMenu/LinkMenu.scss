@@ -5,15 +5,19 @@
   transition-delay: 1s;
 }
 .menu-item {
-  border-radius: 1rem;
-  // background-color: inherit;
-  transition: color 0.5s ease;
+  display: block;
+  border-radius: 0.55rem;
+  transition: 0.5s ease;
   color: $text-additional;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   &:hover {
-    border-radius: 1rem;
-    color: $secondary-color;
-    // background-color: $secondary-color;
-    transition: color 0.5s ease;
+    -webkit-box-shadow: 3px 8px 8px 0px rgba(103, 99, 100, 0.2);
+    -moz-box-shadow: 3px 8px 8px 0px rgba(103, 99, 100, 0.2);
+    box-shadow: 3px 8px 8px 0px rgba(103, 99, 100, 0.2);
+    background-color: inherit;
   }
 }
 .menu-item__wrapper-show {
@@ -38,26 +42,50 @@
 .menu-item__wrapper-show:nth-child(6) {
   transition-delay: 1.2s;
 }
+.menu-item__wrapper-show:nth-child(7) {
+  transition-delay: 1.4s;
+}
 
 /* Добавьте другие элементы и задержки, если необходимо */
 
 @media (min-width: 768px) and (max-width: 1365px) {
   .menu-item {
     font-size: 14px;
-    width: auto;
     padding-right: 15px;
     padding-left: 15px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 6px;
+    padding-bottom: 4px;
+    width: 100%;
+    &:hover {
+      background-color: $text-additional;
+      color: $main-color;
+      @include shadow-dark;
+    }
   }
 }
-@media (min-width: 1366px) and (max-width: 100vw) {
+@media (min-width: 1365px) and (max-width: 1600px) {
   .menu-item {
-    font-size: $font-medium-ultra;
-    width: auto;
-    padding-right: 15px;
-    padding-left: 15px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    text-align: center;
+    font-size: 18px;
+    padding: 4px 12px;
+    width: 100%;
+    &:hover {
+      background-color: $text-additional;
+      color: $main-color;
+      @include shadow-dark;
+    }
+  }
+}
+@media (min-width: 1600px) and (max-width: 100vw) {
+  .menu-item {
+    text-align: center;
+    font-size: 22px;
+    padding: 4px 16px;
+    width: 100%;
+    &:hover {
+      background-color: $text-additional;
+      color: $main-color;
+      @include shadow-dark;
+    }
   }
 }

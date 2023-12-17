@@ -22,7 +22,7 @@ const Header: FC<HeaderProps> = () => {
     };
   }, []);
 
-  return <div className='header'>{windowWidth >= 768 ? <Menu></Menu> : <Burger></Burger>}</div>;
+  return <div className='header'>{windowWidth >= 821 ? <Menu></Menu> : <Burger></Burger>}</div>;
 };
 
 export default Header;

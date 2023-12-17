@@ -1,8 +1,30 @@
-@import '~bootstrap/scss/bootstrap';
 @import './styles/fonts/fonts.scss';
 @import './styles/variables.scss';
 @import '~slick-carousel/slick/slick.css';
 @import '~slick-carousel/slick/slick-theme.css';
+
+@import './component/PopupImage/PopupImage.scss';
+@import './component/App/App.scss';
+@import './component/Header/Header.scss';
+
+@import './component/LinkMenu/LinkMenu.scss';
+@import './component/LinkBurger/LinkBurger.scss';
+@import './component/Burger/Burger.scss';
+@import './component/Menu/Menu.scss';
+
+@import './component/MainSection/MainSection.scss';
+@import './component/MainSectionAbout/MainSectionAbout.scss';
+@import './component/MainImage/MainImage.scss';
+@import './component/SliderSection/SliderSection.scss';
+@import './component/PriceSection/PriceSection.scss';
+@import './component/PriceItem/PriceItem.scss';
+@import './component/PricePopup/PricePopup.scss';
+@import './component/PriceCalculator/PriceCalculator.scss';
+@import './component/StudioSection/StudioSection.scss';
+@import './component/MapSection/MapSection.scss';
+@import './component/SwiperMain/SwiperMain.scss';
+@import './component/WrapperIframe/WrapperIframe.scss';
+@import './component/Action/Action.scss';
 
 body {
   position: relative;
@@ -34,17 +56,23 @@ span {
   display: block;
 }
 button {
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
   box-shadow: none;
   background-color: transparent;
   background: none;
   cursor: pointer;
   border: none;
+  font-family: 'Doloman';
 }
 a {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+  font-family: 'Doloman';
 }
 .wrapper-dark {
   width: 100vw;
@@ -62,25 +90,3 @@ a {
   align-items: center;
   background-color: $secondary-color;
 }
-@import './component/PopupImage/PopupImage.scss';
-@import './component/App/App.scss';
-@import './component/Header/Header.scss';
-
-@import './component/LinkMenu/LinkMenu.scss';
-@import './component/LinkBurger/LinkBurger.scss';
-@import './component/Button/Button.scss';
-@import './component/Burger/Burger.scss';
-@import './component/Menu/Menu.scss';
-
-@import './component/MainSection/MainSection.scss';
-@import './component/MainSectionAbout/MainSectionAbout.scss';
-@import './component/MainImage/MainImage.scss';
-@import './component/SliderSection/SliderSection.scss';
-@import './component/PriceSection/PriceSection.scss';
-@import './component/PriceItem/PriceItem.scss';
-@import './component/PricePopup/PricePopup.scss';
-@import './component/PriceCalculator/PriceCalculator.scss';
-@import './component/MapSection/MapSection.scss';
-@import './component/SwiperMain/SwiperMain.scss';
-@import './component/GalleryMovies/GalleryMovies.scss';
-@import './component/Footer/Footer.scss';
