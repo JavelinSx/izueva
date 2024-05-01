@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border: 2px solid $text-additional;
+  @include shadow-card;
   border-radius: 1.1rem;
 }
 .main-image {
@@ -63,8 +63,8 @@
   }
   .main-image__container {
     width: 100%;
-    height: 270px;
-    max-height: 270px;
+    height: 360px;
+    max-height: 360px;
   }
   .main-image {
     height: 100%;
@@ -85,7 +85,7 @@
   }
   .main-image__container {
     width: 100%;
-    height: 280px;
+    height: 320px;
     max-height: none;
   }
   .main-image {

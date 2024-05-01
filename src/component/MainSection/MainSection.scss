@@ -3,7 +3,7 @@
   max-width: 1024px;
   position: relative;
   background-color: $main-color;
-  width: 90%;
+  width: auto;
   display: grid;
   justify-items: center;
   grid-template-columns: 1fr 1fr 1fr;
@@ -14,7 +14,6 @@
   padding-bottom: 20px;
 }
 .main-section__title {
-  color: $text-additional;
   font-size: 20px;
   width: 78px;
   align-self: center;
@@ -25,10 +24,9 @@
   grid-row: span 1;
   grid-column: span 3;
   z-index: 9;
-  border: 2px solid $text-additional;
   border-radius: 0.7rem;
-  color: $text-additional;
-  background-color: inherit;
+  color: $primary-color;
+  @include shadow-dark;
   width: 100%;
   align-self: flex-end;
   justify-self: flex-end;
@@ -44,9 +42,9 @@
   grid-row: span 1;
   grid-column: span 3;
   z-index: 9;
-  border: 2px solid $text-additional;
   border-radius: 0.7rem;
-  color: $text-additional;
+  @include shadow-dark;
+  color: $primary-color;
   background-color: inherit;
   width: 100%;
   align-self: flex-end;
@@ -80,7 +78,8 @@
     width: 150px;
   }
   .main-setcion__button-more {
-    font-size: 20px;
+    font-size: 22px;
+    height: 45px;
   }
   .main-section__button-rollup {
     font-size: 20px;
@@ -123,6 +122,7 @@
     height: 50px;
   }
   .main-section__button-rollup {
+    height: 50px;
     font-size: 24px;
   }
 }
@@ -152,6 +152,7 @@
     height: 60px;
   }
   .main-section__button-rollup {
+    height: 60px;
     font-size: 28px;
   }
 }

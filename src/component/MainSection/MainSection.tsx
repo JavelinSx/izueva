@@ -41,7 +41,7 @@ const MainSection: FC<MainSectionProps> = () => {
   };
 
   return (
-    <div className='wrapper-dark'>
+    <div className='wrapper-white'>
       <section className='main-section' id='view-section'>
         <h2 className='main-section__title'>РАБОТЫ МАСТЕРА</h2>
         {gallery.map((imgLink, index) => (

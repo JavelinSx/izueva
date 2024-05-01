@@ -8,13 +8,13 @@ import slide7 from '../img/img-slider/slide7.webp';
 import slide8 from '../img/img-slider/slide8.webp';
 import slide9 from '../img/img-slider/slide9.webp';
 import slide10 from '../img/img-slider/slide10.webp';
+import slide11 from '../img/img-slider/slide11.webp';
 import slide12 from '../img/img-slider/slide12.webp';
 import slide13 from '../img/img-slider/slide13.webp';
 import slide14 from '../img/img-slider/slide14.webp';
 import slide15 from '../img/img-slider/slide15.webp';
 import slide16 from '../img/img-slider/slide16.webp';
 import slide17 from '../img/img-slider/slide17.webp';
-import slide18 from '../img/img-slider/slide18.webp';
 
 import slideMin1 from '../img/img-slider-min/slide1.webp';
 import slideMin2 from '../img/img-slider-min/slide2.webp';
@@ -26,19 +26,19 @@ import slideMin7 from '../img/img-slider-min/slide7.webp';
 import slideMin8 from '../img/img-slider-min/slide8.webp';
 import slideMin9 from '../img/img-slider-min/slide9.webp';
 import slideMin10 from '../img/img-slider-min/slide10.webp';
+import slideMin11 from '../img/img-slider-min/slide11.webp';
 import slideMin12 from '../img/img-slider-min/slide12.webp';
 import slideMin13 from '../img/img-slider-min/slide13.webp';
 import slideMin14 from '../img/img-slider-min/slide14.webp';
 import slideMin15 from '../img/img-slider-min/slide15.webp';
 import slideMin16 from '../img/img-slider-min/slide16.webp';
 import slideMin17 from '../img/img-slider-min/slide17.webp';
-import slideMin18 from '../img/img-slider-min/slide18.webp';
 
 import video1 from '../img/img-video/video1.webp';
 import video2 from '../img/img-video/video2.webp';
 import video3 from '../img/img-video/video3.webp';
 import video4 from '../img/img-video/video4.webp';
-import masterImg from '../img/master/Vmake-1698823635.webp';
+import masterImg from '../img/master/master.webp';
 import botox from '../img/img-service-list/botox.webp';
 import collagen from '../img/img-service-list/collagen.webp';
 import recovery from '../img/img-service-list/cold-recovery.webp';
@@ -76,13 +76,13 @@ export const imageSlides = [
   slide8,
   slide9,
   slide10,
+  slide11,
   slide12,
   slide13,
   slide14,
   slide15,
   slide16,
   slide17,
-  slide18,
 ];
 
 export const imageSlidesMin = [
@@ -96,13 +96,13 @@ export const imageSlidesMin = [
   slideMin8,
   slideMin9,
   slideMin10,
+  slideMin11,
   slideMin12,
   slideMin13,
   slideMin14,
   slideMin15,
   slideMin16,
   slideMin17,
-  slideMin18,
 ];
 
 export const masterImgPath = masterImg;

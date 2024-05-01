@@ -8,7 +8,7 @@
   height: 40px;
   transition: 0.3s ease-in-out;
   padding: 0;
-  border: 2px solid $text-additional;
+  border: 1px solid $text-color;
   border-radius: 0.3rem;
   z-index: 9;
   &:hover {
@@ -129,7 +129,7 @@
 }
 
 .animated-icon1 span {
-  background: $text-additional;
+  background: $text-color;
 }
 
 .animated-icon1 span:nth-child(1) {

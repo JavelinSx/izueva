@@ -5,16 +5,16 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding: 15px;
+  padding: 30px;
   align-items: center;
 }
 .action-title {
-  color: $text-additional;
+  color: $text-color;
 }
 .action-info {
   font-size: 18px;
   width: 90%;
-  color: $text-additional;
+  color: $text-color;
 }
 .action-img {
   width: 100%;

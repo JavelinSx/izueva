@@ -107,7 +107,7 @@ const PriceCalculator: FC<PriceCalculatorProps> = () => {
       value: 'botox',
       stepVolumePrice: 600,
       stepWidthPrice: widthPriceStep,
-      startPrice: 2000,
+      startPrice: 2500,
       calculate: true,
     },
     {
@@ -115,7 +115,7 @@ const PriceCalculator: FC<PriceCalculatorProps> = () => {
       value: 'keratinStraighten',
       stepVolumePrice: 600,
       stepWidthPrice: widthPriceStep,
-      startPrice: 2300,
+      startPrice: 2800,
       calculate: true,
     },
   ]);
@@ -169,7 +169,7 @@ const PriceCalculator: FC<PriceCalculatorProps> = () => {
     } else {
       let price = selectedValue.startPrice;
       if (volumeCalculate) {
-        const stepPayVolume = (parseInt(selectHairVolume) - 30) / 10;
+        const stepPayVolume = (parseInt(selectHairVolume) - 40) / 10;
         price += stepPayVolume * selectedValue.stepVolumePrice;
       }
       if (widthCalculate) {

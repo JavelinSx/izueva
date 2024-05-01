@@ -7,7 +7,7 @@ const MainSectionAbout: FC<MainSectionAboutProps> = () => {
   return (
     <div className='wrapper-white'>
       <section className='main-section__about' id='master-section'>
-        <MainImage imagePath={masterImgPath} alt='' classVariative='main-section__master-img'></MainImage>
+        <img src={masterImgPath} alt='' className='main-section__master-img'></img>
 
         <h3 className='main-section__info-title'>ВАШ МАСТЕР</h3>
 

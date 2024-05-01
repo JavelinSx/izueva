@@ -26,31 +26,26 @@
   grid-column-end: 3;
   width: 100% !important;
   justify-self: center;
-  .main-image__wrapper {
-    border: none !important;
-    &:hover {
-      cursor: default;
-    }
-  }
+  border-radius: 1rem;
+  object-fit: cover;
+  @include shadow-card;
 }
 .main-section__info-text {
   font-size: 16px;
   text-align: justify;
-  color: $text-additional;
+  color: $text-color;
   grid-column-start: 1;
   grid-column-end: 4;
 }
 @media (min-width: 768px) and (max-width: 1365px) {
   .main-section__about {
-    padding: 50px;
+    padding: 150px;
+    padding-top: 50px;
+    padding-bottom: 50px;
   }
   .main-section__about-wrapper {
     width: 100%;
     padding: 10px;
-  }
-  .main-section__master-img {
-    max-height: 500px !important;
-    max-width: 650px !important;
   }
   .main-section__info-title {
     font-size: 32px;
@@ -110,7 +105,7 @@
   }
 
   .main-section__info-text {
-    font-size: $font-medium;
+    font-size: 28px;
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start: 1;
