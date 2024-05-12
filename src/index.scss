@@ -26,10 +26,12 @@
 @import './component/WrapperIframe/WrapperIframe.scss';
 @import './component/Action/Action.scss';
 
+@import './component/EmblaCarousel/EmblaCarousel.scss';
+
 body {
   position: relative;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Doloman', 'Roboto', sans-serif;
+  font-family:'Doloman', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;

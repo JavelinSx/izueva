@@ -105,6 +105,8 @@
     border-radius: 1rem;
     justify-self: center;
     align-self: center;
+    object-fit: cover;
+    min-height: 90%;
   }
 }
 .swiper__wrapper-open {

@@ -34,6 +34,17 @@ import slideMin15 from '../img/img-slider-min/slide15.webp';
 import slideMin16 from '../img/img-slider-min/slide16.webp';
 import slideMin17 from '../img/img-slider-min/slide17.webp';
 
+import slideWork1 from '../img/img-slider-work/slide1.jpg'
+import slideWork2 from '../img/img-slider-work/slide2.jpg'
+import slideWork3 from '../img/img-slider-work/slide3.jpg'
+import slideWork4 from '../img/img-slider-work/slide4.jpg'
+import slideWork5 from '../img/img-slider-work/slide5.jpg'
+import slideWork6 from '../img/img-slider-work/slide6.jpg'
+import slideWork7 from '../img/img-slider-work/slide7.jpg'
+import slideWork8 from '../img/img-slider-work/slide8.jpg'
+import slideWork9 from '../img/img-slider-work/slide9.jpg'
+import slideWork10 from '../img/img-slider-work/slide10.jpg'
+
 import video1 from '../img/img-video/video1.webp';
 import video2 from '../img/img-video/video2.webp';
 import video3 from '../img/img-video/video3.webp';
@@ -45,6 +56,19 @@ import recovery from '../img/img-service-list/cold-recovery.webp';
 import spa from '../img/img-service-list/spa.webp';
 import total from '../img/img-service-list/total-recovery.webp';
 import keratin from '../img/img-service-list/keratin.webp';
+
+export const sliderWork = [
+  slideWork1,
+  slideWork3,
+  slideWork2,
+  slideWork4,
+  slideWork6,
+  slideWork5,
+  slideWork7,
+  slideWork8,
+  slideWork9,
+  slideWork10,
+]
 
 export const sliderVideo = [
   {

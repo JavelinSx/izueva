@@ -30,7 +30,7 @@ const App: FC<AppProps> = () => {
     setOpenPopup(false);
   };
   return (
-    <div className='app'>
+    <div className='app theme-light'>
       <Header></Header>
       <MainSection></MainSection>
       <MainSectionAbout></MainSectionAbout>
