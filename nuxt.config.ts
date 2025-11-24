@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     port: 24679, // Изменен порт для WebSocket
   },
 
-  modules: ["@nuxt/ui", "@nuxt/image"],
+  modules: ["@nuxt/ui"],
 
   // SSR и SSG конфигурация
   ssr: true,
@@ -40,20 +40,8 @@ export default defineNuxtConfig({
     },
   },
 
-  // Оптимизация изображений
-  image: {
-    format: ['webp', 'avif'],
-    quality: 80,
-    screens: {
-      xs: 320,
-      sm: 640,
-      md: 768,
-      lg: 1024,
-      xl: 1280,
-      xxl: 1536,
-    },
-    densities: [1, 2],
-  },
+  // Image optimization отключен для SSG
+  // Используем обычные <img> теги с уже оптимизированными изображениями
 
   css: [
     "~/assets/css/main.css",

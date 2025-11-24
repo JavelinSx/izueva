@@ -21,7 +21,7 @@ const handleClose = () => {
         Работы Мастера
       </h2>
 
-      <CircularCarousel :images="imageSlidesMin" @open-image="handlerOpenImg" />
+      <CircularCarouselV2 :images="imageSlidesMin" @open-image="handlerOpenImg" />
 
       <SwiperMain :start-slide="selectedImg" :open="open" @close="handleClose" />
     </section>

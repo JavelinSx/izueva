@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { EffectCards, Pagination, Autoplay } from 'swiper/modules'
-import type { Swiper as SwiperType } from 'swiper'
+import type { Swiper as SwiperType } from 'swiper';
+import { Autoplay, EffectCards, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/vue';
 
 interface Props {
   images: string[]
@@ -20,8 +20,17 @@ const onSwiper = (swiper: SwiperType) => {
   swiperRef.value = swiper
 }
 
-const handleSlideClick = (index: number) => {
-  emit('openImage', index)
+const handleSlideClick = (event: MouseEvent) => {
+  // Проверяем что клик именно на активном слайде
+  const clickedSlide = (event.target as HTMLElement).closest('.swiper-slide')
+  if (!clickedSlide || !swiperRef.value) return
+
+  // Проверяем что это активный слайд
+  if (!clickedSlide.classList.contains('swiper-slide-active')) return
+
+  // Используем realIndex - правильный индекс в loop mode
+  const realIndex = swiperRef.value.realIndex
+  emit('openImage', realIndex)
 }
 </script>
 
@@ -33,28 +42,31 @@ const handleSlideClick = (index: number) => {
           :modules="modules"
           :effect="'cards'"
           :grabCursor="true"
+          :loop="true"
+          :initialSlide="2"
+          :cardsEffect="{
+            perSlideOffset: 15,
+            perSlideRotate: 3,
+            rotate: true,
+            slideShadows: false
+          }"
+          :speed="500"
           :pagination="{ clickable: true, dynamicBullets: true }"
           :autoplay="{
             delay: 3000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true
           }"
-          :cardsEffect="{
-            perSlideOffset: 15,
-            perSlideRotate: 3,
-            rotate: true,
-            slideShadows: true
-          }"
           class="cards-swiper"
           @swiper="onSwiper"
         >
-          <SwiperSlide v-for="(image, index) in images" :key="index" @click="handleSlideClick(index)">
+          <SwiperSlide v-for="(image, index) in images" :key="index" @click="handleSlideClick">
             <div class="card-wrapper cursor-pointer">
-              <NuxtImg
+              <img
                 :src="image"
                 :alt="`Image ${index + 1}`"
                 class="w-full h-full object-cover rounded-2xl"
-                loading="lazy"
+                loading="eager"
               />
             </div>
           </SwiperSlide>
@@ -72,10 +84,16 @@ const handleSlideClick = (index: number) => {
   width: 100%;
   height: 380px;
   overflow: visible !important;
+  /* GPU acceleration */
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 :deep(.cards-swiper .swiper-wrapper) {
   overflow: visible !important;
+  /* Оптимизация производительности */
+  transform: translate3d(0, 0, 0);
 }
 
 @media (min-width: 640px) {
@@ -103,6 +121,9 @@ const handleSlideClick = (index: number) => {
   background: #fff;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   width: 85% !important;
+  /* GPU acceleration для плавности */
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 @media (min-width: 768px) {
@@ -136,10 +157,20 @@ const handleSlideClick = (index: number) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease;
+  /* GPU acceleration */
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
-.card-wrapper:hover {
-  transform: scale(1.02);
+.card-wrapper img {
+  /* Отключаем плавный переход для изображений */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Hover только когда swiper не активен */
+:deep(.swiper-slide-active) .card-wrapper:hover {
+  transform: translate3d(0, 0, 0) scale(1.02);
+  transition: transform 0.2s ease-out;
 }
 </style>
