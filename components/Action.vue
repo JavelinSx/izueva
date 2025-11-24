@@ -37,9 +37,9 @@ const closeImage = () => {
 <template>
   <div class="w-full bg-main overflow-visible">
     <section id="action-section" class="relative p-[25px] pt-0 pb-10 max-w-[1400px] mx-auto
-             md:p-[70px]
-             lg:p-[70px]
-             xl:p-[70px]">
+             md:pt-[70px]
+             lg:pt-[70px]
+             xl:pt-[70px]">
       <h2 class="text-xl md:text-3xl lg:text-4xl xl:text-5xl text-text text-center mb-8
                md:mb-12">
         АКЦИИ
@@ -59,7 +59,7 @@ const closeImage = () => {
       <!-- 3D Coverflow слайдер -->
       <div class="w-full max-w-5xl mx-auto px-4">
         <Swiper :modules="modules" :effect="'coverflow'" :grabCursor="true" :centeredSlides="true" :slidesPerView="1"
-          :pagination="{ clickable: true, dynamicBullets: true }" :autoplay="{
+          :autoplay="{
             delay: 5000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true

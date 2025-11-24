@@ -31,20 +31,13 @@ const setPopupItem = (item: typeof popupItem.value) => {
     <!-- Lazy loaded components для секций ниже fold -->
     <ClientOnly>
       <LazySliderSection />
-      <LazyPriceSection
-        @popup-open="handlePopupOpen"
-        @set-popup-item="setPopupItem"
-      />
+      <LazyPriceSection @popup-open="handlePopupOpen" @set-popup-item="setPopupItem" />
       <LazyPriceCalculator />
-      <LazyStudioSection />
+      <!-- <LazyStudioSection /> -->
       <LazyAction />
       <LazyMapSection />
     </ClientOnly>
 
-    <PricePopup
-      v-if="openPopup"
-      :item="popupItem"
-      @close="handlePopupClose"
-    />
+    <PricePopup v-if="openPopup" :item="popupItem" @close="handlePopupClose" />
   </div>
 </template>

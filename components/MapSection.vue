@@ -4,14 +4,14 @@
 
 <template>
   <div class="w-full bg-main">
-    <section id="contact-section" class="p-[25px] pt-10 pb-10 max-w-[1024px] mx-auto
-             md:w-full md:p-[70px]
-             lg:w-[70%] lg:p-[70px]
-             xl:max-w-[1280px] xl:w-[60%] xl:p-[70px]">
+    <section id="contact-section" class="p-[25px] pt-10 pb-10 w-full  flex flex-col justify-center
+              md:p-[70px]
+              lg:p-[70px]
+              xl:p-[70px]">
       <!-- Заголовок секции -->
       <div class="mb-8 md:mb-12">
         <h2 class="text-xl md:text-3xl lg:text-4xl xl:text-5xl text-text text-center mb-5">
-          Контакты
+          КОНТАКТЫ
         </h2>
         <p class="text-sm md:text-base lg:text-lg xl:text-xl text-text text-center leading-relaxed mb-3">
           Я работаю в Савинске и Плесецке
@@ -26,10 +26,10 @@
       </div>
 
       <!-- Контейнер для карт -->
-      <div class="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-2">
+      <div class="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-2 ">
         <!-- Савинск - Единая карточка -->
         <div
-          class="bg-secondary rounded-2xl shadow-card border border-text/5 hover:shadow-xl transition-all duration-300 overflow-hidden">
+          class="bg-secondary rounded-2xl shadow-card border border-text/5 hover:shadow-xl transition-all duration-300 overflow-hidden max-h-96">
           <!-- Заголовок карточки -->
           <div class="p-5 md:p-6 border-b border-text/10 min-h-[130px]">
             <div class="flex items-start justify-between gap-3">
@@ -71,7 +71,7 @@
 
         <!-- Плесецк - Единая карточка -->
         <div
-          class="bg-secondary rounded-2xl shadow-card border border-text/5 hover:shadow-xl transition-all duration-300 overflow-hidden">
+          class="bg-secondary rounded-2xl shadow-card border border-text/5 hover:shadow-xl transition-all duration-300 overflow-hidden max-h-96">
           <!-- Заголовок карточки -->
           <div class="p-5 md:p-6 border-b border-text/10 min-h-[130px] ">
             <div class="flex items-start justify-between gap-3">

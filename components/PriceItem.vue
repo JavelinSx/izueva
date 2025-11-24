@@ -33,16 +33,20 @@ const handleClick = () => {
       </div>
     </div>
     <div class="flex flex-col justify-between p-2 md:p-4 flex-1 gap-1.5 md:gap-3">
-      <h5 class="text-xs md:text-xl font-bold text-text group-hover:text-primary transition-colors duration-300 leading-tight">{{ title }}</h5>
+      <h5
+        class="text-xs md:text-base font-bold text-text group-hover:text-primary transition-colors duration-300 leading-tight">
+        {{ title }}</h5>
       <div class="flex flex-col gap-1.5 md:gap-3 mt-auto">
-        <div class="text-sm md:text-xl font-bold text-primary group-hover:scale-105 transition-transform duration-300">{{
-          priceText }}₽</div>
+        <div
+          class="text-sm md:text-base font-bold text-primary group-hover:scale-105 transition-transform duration-300">
+          {{
+            priceText }}₽</div>
         <button
-          class="relative px-3 py-1.5 md:px-6 md:py-2.5 text-xs md:text-base font-semibold bg-gradient-to-r from-button to-primary text-text rounded-lg md:rounded-xl hover:from-primary hover:to-button hover:text-main transition-all duration-300 shadow-md hover:shadow-lg overflow-hidden group/btn"
+          class="relative px-3 py-1.5 md:px-6 md:py-2.5 text-xs md:text-base font-semibold hover:cursor-pointer bg-gradient-to-r from-button to-primary text-text rounded-lg md:rounded-xl hover:from-primary hover:to-button hover:text-main transition-all duration-300 shadow-md hover:shadow-lg overflow-hidden group/btn"
           @click="handleClick">
           <span class="relative z-10 text-white text-sm md:text-xl">Подробнее</span>
           <div
-            class="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300">
+            class="absolute inset-0 bg-white/20 translate-x-full group-hover/btn:translate-x-0 transition-transform duration-300">
           </div>
         </button>
       </div>

@@ -20,12 +20,23 @@ export default {
         button: '#dcc5db',
       },
       fontSize: {
-        'small-ultra': '14px',
-        small: '16px',
-        'medium-ultra': '20px',
-        medium: '24px',
-        big: '32px',
+        // Кастомные размеры
+        'small-ultra': '16px',
+        small: '18px',
+        'medium-ultra': '22px',
+        medium: '26px',
+        big: '34px',
         title: '48px',
+        // Переопределяем стандартные Tailwind размеры - минимум 18px для base
+        'xs': ['0.9375rem', { lineHeight: '1.5' }],    // 15px
+        'sm': ['1rem', { lineHeight: '1.5' }],         // 16px
+        'base': ['1.125rem', { lineHeight: '1.6' }],   // 18px - базовый минимум
+        'lg': ['1.25rem', { lineHeight: '1.6' }],      // 20px
+        'xl': ['1.375rem', { lineHeight: '1.6' }],     // 22px
+        '2xl': ['1.625rem', { lineHeight: '1.5' }],    // 26px
+        '3xl': ['2rem', { lineHeight: '1.4' }],        // 32px
+        '4xl': ['2.5rem', { lineHeight: '1.3' }],      // 40px
+        '5xl': ['3.25rem', { lineHeight: '1.2' }],     // 52px
       },
       boxShadow: {
         dark: '0px 0px 10px 8px rgba(103, 99, 100, 0.2)',
