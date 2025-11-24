@@ -44,10 +44,15 @@ jobs:
           echo ""
           echo "Build completed successfully ✅"
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
       - name: Install AWS CLI
         run: |
-          sudo apt-get update
-          sudo apt-get install -y awscli
+          python -m pip install --upgrade pip
+          pip install awscli
 
       - name: Configure AWS CLI for Yandex Cloud
         run: |
