@@ -1,5 +1,18 @@
-# https://www.robotstxt.org/robotstxt.html
-User-agent: Yandex
-User-agent: Google
+# robots.txt для svk-hair.ru
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /api/
+
+# Яндекс
+User-agent: Yandex
+Allow: /
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Sitemap
+Sitemap: https://svk-hair.ru/sitemap.xml
+
+# Время между запросами (рекомендация)
+Crawl-delay: 1

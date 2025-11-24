@@ -1,0 +1,185 @@
+name: Deploy to Yandex Object Storage
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Позволяет запускать вручную
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      NUXT_PUBLIC_SITE_URL: https://svk-hair.ru
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        run: |
+          echo "Building static site..."
+          npm run generate
+        env:
+          NODE_ENV: production
+
+      - name: Verify build output
+        run: |
+          echo "Checking generated files..."
+          echo "Output directory structure:"
+          ls -la .output/
+          ls -la .output/public/
+          echo ""
+          echo "HTML files:"
+          find .output/public -name "*.html" -type f
+          echo ""
+          echo "Build completed successfully ✅"
+
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+
+      - name: Configure AWS CLI for Yandex Cloud
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.YC_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.YC_SECRET_KEY }}
+          aws configure set region ru-central1
+
+      - name: Deploy to Yandex Object Storage
+        run: |
+          echo "Deploying files with correct Content-Type headers..."
+
+          # HTML файлы
+          echo "Uploading HTML files..."
+          aws --endpoint-url=https://storage.yandexcloud.net \
+            s3 sync .output/public s3://${{ secrets.YC_BUCKET_NAME }} \
+            --exclude "*" \
+            --include "*.html" \
+            --content-type "text/html; charset=utf-8" \
+            --cache-control "public, max-age=0, must-revalidate" \
+            --metadata-directive REPLACE \
+            --acl public-read \
+            --delete
+
+          # CSS файлы
+          echo "Uploading CSS files..."
+          aws --endpoint-url=https://storage.yandexcloud.net \
+            s3 sync .output/public s3://${{ secrets.YC_BUCKET_NAME }} \
+            --exclude "*" \
+            --include "*.css" \
+            --content-type "text/css; charset=utf-8" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --metadata-directive REPLACE \
+            --acl public-read
+
+          # JS файлы
+          echo "Uploading JS files..."
+          aws --endpoint-url=https://storage.yandexcloud.net \
+            s3 sync .output/public s3://${{ secrets.YC_BUCKET_NAME }} \
+            --exclude "*" \
+            --include "*.js" \
+            --include "*.mjs" \
+            --content-type "application/javascript; charset=utf-8" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --metadata-directive REPLACE \
+            --acl public-read
+
+          # JSON файлы
+          echo "Uploading JSON files..."
+          aws --endpoint-url=https://storage.yandexcloud.net \
+            s3 sync .output/public s3://${{ secrets.YC_BUCKET_NAME }} \
+            --exclude "*" \
+            --include "*.json" \
+            --content-type "application/json; charset=utf-8" \
+            --cache-control "public, max-age=3600" \
+            --metadata-directive REPLACE \
+            --acl public-read
+
+          # Изображения
+          echo "Uploading images..."
+          aws --endpoint-url=https://storage.yandexcloud.net \
+            s3 sync .output/public s3://${{ secrets.YC_BUCKET_NAME }} \
+            --exclude "*" \
+            --include "*.webp" \
+            --include "*.png" \
+            --include "*.jpg" \
+            --include "*.jpeg" \
+            --include "*.gif" \
+            --include "*.svg" \
+            --include "*.ico" \
+            --include "*.avif" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --metadata-directive REPLACE \
+            --acl public-read
+
+          # Шрифты
+          echo "Uploading fonts..."
+          aws --endpoint-url=https://storage.yandexcloud.net \
+            s3 sync .output/public s3://${{ secrets.YC_BUCKET_NAME }} \
+            --exclude "*" \
+            --include "*.woff" \
+            --include "*.woff2" \
+            --include "*.ttf" \
+            --include "*.eot" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --metadata-directive REPLACE \
+            --acl public-read
+
+          # XML и TXT файлы
+          echo "Uploading XML and TXT files..."
+          aws --endpoint-url=https://storage.yandexcloud.net \
+            s3 sync .output/public s3://${{ secrets.YC_BUCKET_NAME }} \
+            --exclude "*" \
+            --include "*.xml" \
+            --include "*.txt" \
+            --content-type "text/plain; charset=utf-8" \
+            --cache-control "public, max-age=3600" \
+            --metadata-directive REPLACE \
+            --acl public-read
+
+          # Остальные файлы
+          echo "Uploading remaining files..."
+          aws --endpoint-url=https://storage.yandexcloud.net \
+            s3 sync .output/public s3://${{ secrets.YC_BUCKET_NAME }} \
+            --exclude "*.html" \
+            --exclude "*.css" \
+            --exclude "*.js" \
+            --exclude "*.mjs" \
+            --exclude "*.json" \
+            --exclude "*.webp" \
+            --exclude "*.png" \
+            --exclude "*.jpg" \
+            --exclude "*.jpeg" \
+            --exclude "*.gif" \
+            --exclude "*.svg" \
+            --exclude "*.ico" \
+            --exclude "*.avif" \
+            --exclude "*.woff" \
+            --exclude "*.woff2" \
+            --exclude "*.ttf" \
+            --exclude "*.eot" \
+            --exclude "*.xml" \
+            --exclude "*.txt" \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --cache-control "public, max-age=3600" \
+            --metadata-directive REPLACE \
+            --acl public-read
+
+          echo "✅ All files uploaded with correct Content-Type headers"
+
+      - name: Deployment complete
+        run: |
+          echo "✅ Deployment completed successfully!"
+          echo "🌐 Site URL: https://${{ secrets.YC_BUCKET_NAME }}.storage.yandexcloud.net"
+          echo "🌐 Custom domain: https://svk-hair.ru"

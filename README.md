@@ -1,47 +1,197 @@
-# Getting Started with Create React App
+# Студия красоты Ирины Зуевой - Официальный сайт
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Профессиональный сайт студии красоты с процедурами для волос в Савинском и Плесецке
 
-## Available Scripts
+[![Deploy](https://github.com/YOUR_USERNAME/izueva/actions/workflows/deploy.yml/badge.svg)](https://github.com/YOUR_USERNAME/izueva/actions/workflows/deploy.yml)
+[![Nuxt](https://img.shields.io/badge/Nuxt-4.2-00DC82?logo=nuxt.js)](https://nuxt.com)
+[![License](https://img.shields.io/badge/license-Private-red.svg)](LICENSE)
 
-In the project directory, you can run:
+## 🚀 Технологии
 
-### `npm start`
+- **Framework:** [Nuxt 4](https://nuxt.com) - SSG mode
+- **UI Library:** [Nuxt UI](https://ui.nuxt.com)
+- **Styling:** Tailwind CSS
+- **Images:** Nuxt Image (WebP/AVIF optimization)
+- **Slider:** Swiper.js
+- **Analytics:** Yandex Metrika
+- **Deployment:** Yandex Object Storage + GitHub Actions
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## ✨ Особенности
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- ⚡ **SSG** - Статическая генерация для максимальной скорости
+- 🖼️ **Image Optimization** - Автоматическая оптимизация изображений (WebP/AVIF)
+- 🎨 **Responsive Design** - Полностью адаптивный дизайн
+- 🚀 **Lazy Loading** - Ленивая загрузка компонентов и изображений
+- 📱 **Mobile First** - Оптимизация для мобильных устройств
+- 🔍 **SEO Optimized** - Полная SEO оптимизация с JSON-LD
+- ⚙️ **Compression** - Gzip и Brotli сжатие
+- 🎯 **Performance** - Lighthouse Score 90+
 
-### `npm test`
+## 📦 Установка
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+# Клонирование репозитория
+git clone https://github.com/YOUR_USERNAME/izueva.git
+cd izueva
 
-### `npm run build`
+# Установка зависимостей
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ Разработка
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+# Запуск dev сервера на http://localhost:3000
+npm run dev
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🏗️ Production Build
 
-### `npm run eject`
+```bash
+# SSG Build (рекомендуется)
+npm run generate
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Альтернативная команда
+npm run build:ssg
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Локальный preview production сборки
+npm run preview
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Анализ размера bundle
+npm run analyze
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 📂 Структура проекта
 
-## Learn More
+```
+izueva/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          # GitHub Actions для автодеплоя
+├── assets/
+│   └── css/
+│       └── main.css            # Основные стили
+├── components/                  # Vue компоненты
+│   ├── Header.vue
+│   ├── MapSection.vue          # Секция с картами
+│   ├── PriceSection.vue
+│   └── ...
+├── composables/                 # Composables
+│   └── useImageSlides.ts
+├── pages/                       # Страницы
+│   └── index.vue
+├── public/                      # Статические файлы
+│   ├── images/                 # Изображения
+│   ├── robots.txt
+│   └── sitemap.xml
+├── .env.example                # Пример env файлов
+├── BUILD_GUIDE.md              # Полное руководство по сборке
+├── OPTIMIZATION_CHECKLIST.md   # Чеклист оптимизаций
+├── nuxt.config.ts              # Конфигурация Nuxt
+├── package.json
+└── tailwind.config.ts          # Конфигурация Tailwind
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🚀 Деплой
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-# l-studio
+### Автоматический деплой (GitHub Actions)
+
+1. Настройте секреты в GitHub:
+   - `YC_KEY_ID` - Access Key ID от Yandex Cloud
+   - `YC_SECRET_KEY` - Secret Access Key
+   - `YC_BUCKET_NAME` - Имя бакета
+
+   📖 Подробная инструкция: [.github/SECRETS_GUIDE.md](.github/SECRETS_GUIDE.md)
+
+2. Push в ветку `main` автоматически запустит деплой
+
+3. Или запустите вручную:
+   - GitHub → Actions → Deploy to Yandex Object Storage → Run workflow
+
+### Ручной деплой
+
+```bash
+# 1. Собрать проект
+npm run generate
+
+# 2. Содержимое .output/public/ залить на хостинг
+```
+
+## 📊 Performance
+
+Целевые показатели (Lighthouse):
+
+- ✅ Performance: 90+
+- ✅ Accessibility: 95+
+- ✅ Best Practices: 95+
+- ✅ SEO: 100
+
+Core Web Vitals:
+- ✅ LCP < 2.5s
+- ✅ FID < 100ms
+- ✅ CLS < 0.1
+
+## 🔧 Оптимизации
+
+- [x] Static Site Generation (SSG)
+- [x] Image optimization (WebP, AVIF)
+- [x] Lazy loading components
+- [x] Code splitting (CSS & JS)
+- [x] Gzip & Brotli compression
+- [x] Async scripts loading
+- [x] Proper caching headers
+- [x] Minification (JS, CSS, HTML)
+- [x] Tree shaking
+- [x] Critical CSS
+
+📖 Полный список: [OPTIMIZATION_CHECKLIST.md](OPTIMIZATION_CHECKLIST.md)
+
+## 📝 Документация
+
+- [BUILD_GUIDE.md](BUILD_GUIDE.md) - Руководство по сборке и деплою
+- [OPTIMIZATION_CHECKLIST.md](OPTIMIZATION_CHECKLIST.md) - Чеклист оптимизаций
+- [.github/SECRETS_GUIDE.md](.github/SECRETS_GUIDE.md) - Настройка GitHub Secrets
+
+## 🧪 Тестирование
+
+```bash
+# Проверка типов
+npm run typecheck
+
+# Lint
+npm run lint
+
+# Build test
+npm run generate
+npm run preview
+```
+
+## 📱 Поддерживаемые браузеры
+
+- Chrome (последние 2 версии)
+- Firefox (последние 2 версии)
+- Safari (последние 2 версии)
+- Edge (последние 2 версии)
+- iOS Safari (последние 2 версии)
+- Chrome Android (последние 2 версии)
+
+## 🔒 Безопасность
+
+- Все секреты хранятся в GitHub Secrets
+- HTTPS обязателен
+- Безопасные заголовки HTTP
+- CSP (Content Security Policy)
+
+## 📞 Контакты
+
+- **Сайт:** https://svk-hair.ru
+- **Телефон:** 8 902 196-24-07
+- **Локации:** Савинский, Плесецк
+
+## 📄 Лицензия
+
+Частный проект. Все права защищены © 2025 Студия красоты Ирины Зуевой
+
+---
+
+Made with ❤️ using [Nuxt 4](https://nuxt.com)
