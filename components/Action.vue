@@ -36,7 +36,7 @@ const closeImage = () => {
 
 <template>
   <div class="w-full bg-main overflow-visible">
-    <section id="action-section" class="relative p-[25px] pt-0 pb-10 max-w-[1400px] mx-auto
+    <section id="action-section" class="relative p-[25px] pt-10 pb-10 max-w-[1400px] mx-auto
              md:pt-[70px]
              lg:pt-[70px]
              xl:pt-[70px]">

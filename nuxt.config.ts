@@ -103,9 +103,24 @@ export default defineNuxtConfig({
         { name: "twitter:image", content: "/logo512.png" },
       ],
       link: [
+        // Основные favicon для браузеров
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-        { rel: "apple-touch-icon", href: "/logo192.png" },
+        { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
+        { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+        { rel: "icon", type: "image/png", sizes: "48x48", href: "/favicon-48x48.png" },
+
+        // Apple Touch Icons (iOS)
+        { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+        { rel: "apple-touch-icon", sizes: "192x192", href: "/logo192.png" },
+
+        // Android/Chrome
+        { rel: "icon", type: "image/png", sizes: "192x192", href: "/logo192.png" },
+        { rel: "icon", type: "image/png", sizes: "512x512", href: "/logo512.png" },
+
+        // Manifest для PWA
         { rel: "manifest", href: "/manifest.json" },
+
+        // Canonical URL
         { rel: "canonical", href: "https://svk-hair.ru" },
       ],
       script: [
