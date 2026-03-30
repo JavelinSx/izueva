@@ -2,6 +2,11 @@
 import { Autoplay, EffectCoverflow } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
+// Импортируем Swiper стили только для этого компонента
+import 'swiper/css'
+import 'swiper/css/effect-coverflow'
+import 'swiper/css/autoplay'
+
 const { sliderVideo } = useImageSlides()
 const modules = [Autoplay, EffectCoverflow]
 </script>

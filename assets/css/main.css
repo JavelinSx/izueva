@@ -10,6 +10,18 @@
   font-display: swap;
 }
 
+/* Оптимизация рендеринга */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Отключаем will-change для элементов, которые не анимируются */
+img {
+  will-change: auto;
+  content-visibility: auto;
+}
+
 @theme {
   /* Font Family */
   --font-family-base: "Doloman Pavljenko", system-ui, -apple-system, sans-serif;

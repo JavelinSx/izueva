@@ -2,6 +2,11 @@
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Pagination, Zoom, Keyboard, Mousewheel, Autoplay } from 'swiper/modules'
 
+// Импортируем Swiper стили только для этого компонента
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/zoom'
+
 interface Props {
   open: boolean
   startSlide: number

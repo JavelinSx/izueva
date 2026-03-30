@@ -76,12 +76,6 @@ export default defineNuxtConfig({
 
   css: [
     "~/assets/css/main.css",
-    "swiper/css",
-    "swiper/css/pagination",
-    "swiper/css/zoom",
-    "swiper/css/effect-coverflow",
-    "swiper/css/effect-cards",
-    "swiper/css/autoplay",
   ],
 
   // Experimental features для оптимизации
@@ -213,6 +207,22 @@ export default defineNuxtConfig({
           type: "image/webp",
           fetchpriority: "high"
         },
+      ],
+      style: [
+        // Критический inline CSS для первого экрана
+        {
+          children: `
+            body { margin: 0; font-family: "Doloman Pavljenko", system-ui, sans-serif; }
+            .bg-main { background-color: #f5f5f5; }
+            .bg-primary { background-color: #2d3142; }
+            .text-text { color: #1a1a1a; }
+            .text-title { color: #f7e2e1; }
+            .fixed { position: fixed; }
+            .z-\\[100\\] { z-index: 100; }
+            .shadow-dark { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+          `,
+          type: 'text/css'
+        }
       ],
       script: [
         // Yandex Metrika - оптимизированная загрузка
