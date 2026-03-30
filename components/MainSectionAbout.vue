@@ -45,7 +45,7 @@ onMounted(() => {
         </p>
       </div>
 
-      <div v-animate="{ animation: 'fade-in-up', delay: 200 }">
+      <div v-animate="{ animation: 'fade-in-up', delay: 200 }" class="col-span-full">
         <WorksCarousel />
       </div>
     </section>

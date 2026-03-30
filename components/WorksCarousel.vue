@@ -24,7 +24,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="works-carousel col-start-1 col-end-4 w-full lg:col-start-1 lg:col-end-7 xl:col-start-1 xl:col-end-7">
+  <div class="works-carousel col-span-full w-full row-span-1">
     <!-- Обычная карусель -->
     <Swiper v-if="!isFullView" :modules="modules" :slides-per-view="1" :space-between="30" :breakpoints="{
       640: { slidesPerView: 1, spaceBetween: 20 },
