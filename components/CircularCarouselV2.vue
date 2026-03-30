@@ -134,6 +134,45 @@ const handleSlideClick = () => {
   }
 }
 
+// Функция для определения приоритета загрузки изображения
+const getImageLoadingProps = (index: number) => {
+  const position = index - currentIndex.value
+  let normalizedPosition = position
+
+  if (position > totalSlides.value / 2) {
+    normalizedPosition = position - totalSlides.value
+  } else if (position < -totalSlides.value / 2) {
+    normalizedPosition = position + totalSlides.value
+  }
+
+  const absPosition = Math.abs(normalizedPosition)
+
+  // Активное изображение - высокий приоритет
+  if (absPosition === 0) {
+    return {
+      loading: 'eager' as const,
+      fetchpriority: 'high' as const,
+      decoding: 'auto' as const
+    }
+  }
+
+  // Соседние изображения - обычная загрузка
+  if (absPosition <= 2) {
+    return {
+      loading: 'eager' as const,
+      fetchpriority: 'auto' as const,
+      decoding: 'async' as const
+    }
+  }
+
+  // Остальные - ленивая загрузка
+  return {
+    loading: 'lazy' as const,
+    fetchpriority: 'low' as const,
+    decoding: 'async' as const
+  }
+}
+
 // Получить позицию слайда
 const getSlideStyle = (index: number) => {
   const position = index - currentIndex.value
@@ -263,7 +302,12 @@ watch(isDragging, (newVal) => {
       <div class="cards-wrapper">
         <div v-for="(image, index) in images" :key="index" class="card" :style="getSlideStyle(index)"
           @click="handleSlideClick">
-          <img :src="image" :alt="`Image ${index + 1}`" draggable="false" />
+          <img
+            :src="image"
+            :alt="`Image ${index + 1}`"
+            draggable="false"
+            v-bind="getImageLoadingProps(index)"
+          />
         </div>
       </div>
 

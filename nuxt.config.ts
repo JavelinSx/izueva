@@ -6,7 +6,22 @@ export default defineNuxtConfig({
     port: 24679, // Изменен порт для WebSocket
   },
 
-  modules: ["@nuxt/ui"],
+  modules: ["@nuxt/ui", "@nuxt/image"],
+
+  // Настройки image оптимизации
+  image: {
+    format: ['webp', 'avif'],
+    quality: 80,
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536,
+    },
+    densities: [1, 2],
+  },
 
   // SSR и SSG конфигурация
   ssr: true,
@@ -23,17 +38,33 @@ export default defineNuxtConfig({
       gzip: true,
       brotli: true,
     },
+    // Минификация
+    minify: true,
+    // Оптимизация вывода
+    output: {
+      publicDir: '.output/public'
+    },
   },
 
   // Настройки роутинга для SSG
   routeRules: {
-    '/': { prerender: true },
-    '/**': {
+    '/': {
+      prerender: true,
+      headers: {
+        'Cache-Control': 'public, max-age=3600, must-revalidate'
+      }
+    },
+    '/_nuxt/**': {
       headers: {
         'Cache-Control': 'public, max-age=31536000, immutable'
       }
     },
     '/images/**': {
+      headers: {
+        'Cache-Control': 'public, max-age=31536000, immutable'
+      }
+    },
+    '/assets/**': {
       headers: {
         'Cache-Control': 'public, max-age=31536000, immutable'
       }
@@ -46,29 +77,65 @@ export default defineNuxtConfig({
   css: [
     "~/assets/css/main.css",
     "swiper/css",
-    "swiper/css/navigation",
     "swiper/css/pagination",
     "swiper/css/zoom",
     "swiper/css/effect-coverflow",
+    "swiper/css/effect-cards",
+    "swiper/css/autoplay",
   ],
 
   // Experimental features для оптимизации
   experimental: {
     payloadExtraction: true,
     viewTransition: true,
+    componentIslands: true,
+  },
+
+  // Оптимизация компонентов
+  components: {
+    global: false,
+    dirs: [
+      {
+        path: '~/components',
+        pathPrefix: false,
+      },
+    ],
   },
 
   // Vite оптимизации
   vite: {
     build: {
       cssCodeSplit: true,
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            'swiper': ['swiper'],
-          },
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
         },
       },
+      rollupOptions: {
+        output: {
+          manualChunks: (id) => {
+            // Разделение Swiper на отдельный чанк
+            if (id.includes('swiper')) {
+              return 'swiper'
+            }
+            // Разделение node_modules на vendor чанк
+            if (id.includes('node_modules')) {
+              return 'vendor'
+            }
+          },
+          // Оптимизация имен файлов для кэширования
+          chunkFileNames: '_nuxt/[name]-[hash].js',
+          entryFileNames: '_nuxt/[name]-[hash].js',
+          assetFileNames: '_nuxt/[name]-[hash].[ext]',
+        },
+      },
+      // Увеличиваем предел размера чанка
+      chunkSizeWarningLimit: 1000,
+    },
+    optimizeDeps: {
+      include: ['swiper/vue', 'swiper/modules'],
     },
   },
 
@@ -123,6 +190,29 @@ export default defineNuxtConfig({
 
         // Canonical URL
         { rel: "canonical", href: "https://svk-hair.ru" },
+
+        // Preconnect для критических ресурсов
+        { rel: "preconnect", href: "https://mc.yandex.ru" },
+        { rel: "dns-prefetch", href: "https://mc.yandex.ru" },
+        { rel: "preconnect", href: "https://www.youtube.com" },
+        { rel: "dns-prefetch", href: "https://www.youtube.com" },
+
+        // Preload критического шрифта
+        {
+          rel: "preload",
+          href: "/assets/font/DolomanPavljenko.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossorigin: "anonymous"
+        },
+        // Preload критического изображения (активное в карусели при загрузке - 3-й слайд, index 2)
+        {
+          rel: "preload",
+          href: "/images/img-slider-min/slide3.webp",
+          as: "image",
+          type: "image/webp",
+          fetchpriority: "high"
+        },
       ],
       script: [
         // Yandex Metrika - оптимизированная загрузка

@@ -186,17 +186,18 @@ const handleChangeHairWidth = () => {
 <template>
   <div class="w-full bg-primary py-16" id="calculator-section">
     <section class="max-w-3xl mx-auto px-4">
-      <h2 class="text-title  text-center text-main mb-4 text-xl md:text-3xl lg:text-4xl xl:text-5xl">Примерный расчёт стоимости услуг
+      <h2 v-animate="'fade-in-down'" class="text-title  text-center text-main mb-4 text-xl md:text-3xl lg:text-4xl xl:text-5xl">Примерный расчёт стоимости услуг
       </h2>
-      <h5 class="text-sm md:text-base lg:text-lg xl:text-xl text-center text-main mb-8">
+      <h5 v-animate="{ animation: 'fade-in-up', delay: 100 }" class="text-sm md:text-base lg:text-lg xl:text-xl text-center text-main mb-8">
         Расчёт в калькуляторе - примерный. Точную стоимость можно узнать после очной коснультации.
       </h5>
 
       <!-- Service selector -->
-      <label class="block text-base md:text-lg lg:text-xl text-main mb-2">Выберите услугу:</label>
-      <div
-        class="relative w-full p-4 bg-main border border-text-additional rounded-lg cursor-pointer hover:border-button transition-colors mb-4"
-        @click="handleOpen">
+      <div v-animate="{ animation: 'fade-in-up', delay: 200 }">
+        <label class="block text-base md:text-lg lg:text-xl text-main mb-2">Выберите услугу:</label>
+        <div
+          class="relative w-full p-4 bg-main border border-text-additional rounded-lg cursor-pointer hover:border-button transition-colors mb-4"
+          @click="handleOpen">
         <span class="text-text">{{ selectedLabel }}</span>
       </div>
 
@@ -228,8 +229,9 @@ const handleChangeHairWidth = () => {
       </div>
 
       <!-- Price display -->
-      <div class="text-center mt-8">
-        <span class="text-xl md:text-2xl lg:text-3xl font-bold text-button">От {{ constPay }}₽</span>
+        <div class="text-center mt-8">
+          <span class="text-xl md:text-2xl lg:text-3xl font-bold text-button">От {{ constPay }}₽</span>
+        </div>
       </div>
     </section>
   </div>

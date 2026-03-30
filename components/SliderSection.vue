@@ -9,9 +9,10 @@ const modules = [Autoplay, EffectCoverflow]
 <template>
   <div class="w-full bg-primary py-16 md:py-24" id="view-section">
     <section class="max-w-7xl mx-auto px-4">
-      <h2 class="text-title text-center text-xl md:text-3xl lg:text-4xl xl:text-5xl md:pb-8">ПРИМЕРЫ РАБОТ ДО\ПОСЛЕ</h2>
+      <h2 v-animate="'fade-in-down'" class="text-title text-center text-xl md:text-3xl lg:text-4xl xl:text-5xl md:pb-8">ПРИМЕРЫ РАБОТ ДО\ПОСЛЕ</h2>
 
-      <Swiper :modules="modules" :slides-per-view="1" :space-between="30"
+      <div v-animate="{ animation: 'fade-in-up', delay: 200 }">
+        <Swiper :modules="modules" :slides-per-view="1" :space-between="30"
         :autoplay="{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }" :effect="'coverflow'"
         :coverflow-effect="{
           rotate: 30,
@@ -24,10 +25,11 @@ const modules = [Autoplay, EffectCoverflow]
           768: { slidesPerView: 2, spaceBetween: 30 },
           1024: { slidesPerView: 2, spaceBetween: 40 }
         }" :loop="true" :speed="800" class="video-swiper">
-        <SwiperSlide v-for="(item, index) in sliderVideo" :key="index" class="">
-          <WrapperIframe :link="item.link" :link-wrapper="item.img" />
-        </SwiperSlide>
-      </Swiper>
+          <SwiperSlide v-for="(item, index) in sliderVideo" :key="index" class="">
+            <WrapperIframe :link="item.link" :link-wrapper="item.img" />
+          </SwiperSlide>
+        </Swiper>
+      </div>
     </section>
   </div>
 </template>

@@ -63,6 +63,8 @@ watch(() => props.open, (newVal) => {
                   :alt="`Slide ${index + 1}`"
                   class="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
                   loading="lazy"
+                  :fetchpriority="index === startSlide ? 'high' : 'low'"
+                  decoding="async"
                 />
               </div>
             </SwiperSlide>

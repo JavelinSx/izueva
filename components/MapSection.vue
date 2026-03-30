@@ -10,13 +10,13 @@
               xl:p-[70px]">
       <!-- Заголовок секции -->
       <div class="mb-8 md:mb-12">
-        <h2 class="text-xl md:text-3xl lg:text-4xl xl:text-5xl text-text text-center mb-5">
+        <h2 v-animate="'fade-in-down'" class="text-xl md:text-3xl lg:text-4xl xl:text-5xl text-text text-center mb-5">
           КОНТАКТЫ
         </h2>
-        <p class="text-sm md:text-base lg:text-lg xl:text-xl text-text text-center leading-relaxed mb-3">
+        <p v-animate="{ animation: 'fade-in-up', delay: 100 }" class="text-sm md:text-base lg:text-lg xl:text-xl text-text text-center leading-relaxed mb-3">
           Я работаю в Савинске и Плесецке
         </p>
-        <p class="text-sm md:text-base lg:text-lg xl:text-xl text-text text-center leading-relaxed">
+        <p v-animate="{ animation: 'fade-in-up', delay: 200 }" class="text-sm md:text-base lg:text-lg xl:text-xl text-text text-center leading-relaxed">
           Телефон:
           <a href="tel:89021962407"
             class="text-primary hover:text-button transition-colors duration-300 font-semibold underline decoration-2 underline-offset-2">
@@ -28,7 +28,7 @@
       <!-- Контейнер для карт -->
       <div class="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-2 ">
         <!-- Савинск - Единая карточка -->
-        <div
+        <div v-animate="{ animation: 'fade-in-left', delay: 100 }"
           class="bg-secondary rounded-2xl shadow-card border border-text/5 hover:shadow-xl transition-all duration-300 overflow-hidden max-h-96">
           <!-- Заголовок карточки -->
           <div class="p-5 md:p-6 border-b border-text/10 min-h-[130px]">
@@ -70,7 +70,7 @@
         </div>
 
         <!-- Плесецк - Единая карточка -->
-        <div
+        <div v-animate="{ animation: 'fade-in-right', delay: 200 }"
           class="bg-secondary rounded-2xl shadow-card border border-text/5 hover:shadow-xl transition-all duration-300 overflow-hidden max-h-96">
           <!-- Заголовок карточки -->
           <div class="p-5 md:p-6 border-b border-text/10 min-h-[130px] ">

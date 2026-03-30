@@ -40,13 +40,13 @@ const closeImage = () => {
              md:pt-[70px]
              lg:pt-[70px]
              xl:pt-[70px]">
-      <h2 class="text-xl md:text-3xl lg:text-4xl xl:text-5xl text-text text-center mb-8
+      <h2 v-animate="'fade-in-down'" class="text-xl md:text-3xl lg:text-4xl xl:text-5xl text-text text-center mb-8
                md:mb-12">
         АКЦИИ
       </h2>
 
       <!-- Текстовое описание -->
-      <div class="text-center  md:mb-16 max-w-3xl mx-auto px-4">
+      <div v-animate="{ animation: 'fade-in-up', delay: 100 }" class="text-center  md:mb-16 max-w-3xl mx-auto px-4">
         <p class="text-base md:text-lg lg:text-xl xl:text-2xl mb-4 text-text-900">
           При первом посещении вы получаете <strong class="text-button-600">карту любимого клиента</strong> и памятку по
           уходу за волосами.
@@ -57,7 +57,7 @@ const closeImage = () => {
       </div>
 
       <!-- 3D Coverflow слайдер -->
-      <div class="w-full max-w-5xl mx-auto px-4">
+      <div v-animate="{ animation: 'scale-in', delay: 200 }" class="w-full max-w-5xl mx-auto px-4">
         <Swiper :modules="modules" :effect="'coverflow'" :grabCursor="true" :centeredSlides="true" :slidesPerView="1"
           :autoplay="{
             delay: 5000,
