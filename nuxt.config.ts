@@ -133,8 +133,17 @@ export default defineNuxtConfig({
     },
   },
 
+  runtimeConfig: {
+    public: {
+      // Google Таблица с ценами (доступ «все, у кого есть ссылка — читатель»)
+      pricesSheetId: "1j2gEJF9QAewGXBwKYrH1a6XMGCj57gP3bUvUiSMLv9M",
+      pricesSheetGid: "0",
+    },
+  },
+
   app: {
     head: {
+      htmlAttrs: { lang: "ru" },
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
       title: "Ботокс для волос, Кератиновое выпрямление в Савинском и Плесецке | Мастер Ирина Зуева",
@@ -149,7 +158,7 @@ export default defineNuxtConfig({
         },
         { name: "author", content: "Ирина Зуева" },
         { name: "yandex-verification", content: "585bf155bd068671" },
-        { name: "theme-color", content: "#5c5552" },
+        { name: "theme-color", content: "#fbf3f1" },
         { name: "geo.region", content: "RU-ARK" },
         { name: "geo.placename", content: "Плесецк, Савинский" },
         { name: "robots", content: "index, follow" },
@@ -191,40 +200,36 @@ export default defineNuxtConfig({
         { rel: "preconnect", href: "https://www.youtube.com" },
         { rel: "dns-prefetch", href: "https://www.youtube.com" },
 
-        // Preload критического шрифта
+        // Шрифты: Cormorant Garamond (заголовки), Manrope (текст), Marck Script (подпись)
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
+        { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "anonymous" },
         {
-          rel: "preload",
-          href: "/assets/font/DolomanPavljenko.woff2",
-          as: "font",
-          type: "font/woff2",
-          crossorigin: "anonymous"
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&family=Marck+Script&display=swap",
         },
-        // Preload критического изображения (активное в карусели при загрузке - 3-й слайд, index 2)
+        // Preload фото мастера на первом экране
         {
           rel: "preload",
-          href: "/images/img-slider-min/slide3.webp",
+          href: "/images/master/master-hero.webp",
           as: "image",
           type: "image/webp",
           fetchpriority: "high"
         },
+        // Таблица цен
+        { rel: "preconnect", href: "https://docs.google.com" },
       ],
       style: [
         // Критический inline CSS для первого экрана
         {
           children: `
-            body { margin: 0; font-family: "Doloman Pavljenko", system-ui, sans-serif; }
-            .bg-main { background-color: #f5f5f5; }
-            .bg-primary { background-color: #2d3142; }
-            .text-text { color: #1a1a1a; }
-            .text-title { color: #f7e2e1; }
-            .fixed { position: fixed; }
-            .z-\\[100\\] { z-index: 100; }
-            .shadow-dark { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+            html, body { margin: 0; background: #fbf3f1; color: #3a2333; font-family: "Manrope", system-ui, sans-serif; }
           `,
           type: 'text/css'
         }
       ],
       script: [
+        // Включает анимации появления при скролле (без JS контент виден сразу)
+        { children: "document.documentElement.classList.add('js-anim')" },
         // Yandex Metrika - оптимизированная загрузка
         {
           src: "https://mc.yandex.ru/metrika/tag.js",

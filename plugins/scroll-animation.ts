@@ -31,7 +31,14 @@ const observerMap = new WeakMap<HTMLElement, IntersectionObserver>()
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive('animate', {
+    // На сервере помечаем элемент: до появления на экране он скрыт стилем html.js-anim [data-animate]
+    getSSRProps() {
+      return { 'data-animate': '' }
+    },
+
     mounted(el: HTMLElement, binding) {
+      el.dataset.animate = ''
+
       // Парсим аргументы директивы
       let options: AnimateDirectiveOptions = {}
 

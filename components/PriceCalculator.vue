@@ -1,238 +1,143 @@
 <script setup lang="ts">
-interface WidthPriceStep {
-  width: number[]
-  price: number
-}
+const services = useServices()
 
-interface ServiceOption {
-  label: string
-  value: string
-  calculate: boolean
-  startPrice: number
-  stepVolumePrice: number
-  stepWidthPrice: WidthPriceStep[]
-}
+// Выбранная процедура (по названию — так выбор не сбивается, когда цены подгружаются из таблицы)
+const calcService = useState<string>('calc-service', () => '')
+const mainName = computed({
+  get: () => services.value.some(s => s.name === calcService.value)
+    ? calcService.value
+    : services.value[0]?.name ?? '',
+  set: (name: string) => {
+    calcService.value = name
+  },
+})
+const main = computed(() => services.value.find(s => s.name === mainName.value))
 
-const widthPriceStep: WidthPriceStep[] = [
-  { width: [7, 8], price: 600 },
-  { width: [9, 10], price: 900 },
-  { width: [11, 12], price: 1100 },
-]
-
-const selectedLabel = ref('')
-const selectedValue = ref<ServiceOption>({
-  label: '',
-  value: '',
-  stepVolumePrice: 0,
-  stepWidthPrice: widthPriceStep,
-  startPrice: 0,
-  calculate: true,
+const length = ref(50)
+const lengthFill = computed(() => `${((length.value - LENGTH_MIN) / (LENGTH_MAX - LENGTH_MIN)) * 100}%`)
+const lengthTicks = computed(() => {
+  const ticks: number[] = []
+  for (let l = LENGTH_MIN; l <= LENGTH_MAX; l += 20) ticks.push(l)
+  return ticks
 })
 
-const selectHairVolume = ref('30')
-const selectHairWidth = ref('7')
-const constPay = ref(0)
-const widthCalculate = ref(false)
-const volumeCalculate = ref(false)
-const hairVolume = ref<HTMLInputElement | null>(null)
-const hairWidth = ref<HTMLInputElement | null>(null)
-const isOpen = ref(false)
+// Дополнения — услуги со скидкой в комплексе (например, пилинг)
+const addonNames = ref<string[]>([])
+const addonOptions = computed(() => services.value.filter(s => s.comboDiscount > 0 && s.name !== mainName.value))
+watch(mainName, (name) => {
+  addonNames.value = addonNames.value.filter(n => n !== name)
+})
 
-const options: ServiceOption[] = [
-  {
-    label: 'Тотальное восстановление',
-    value: 'totalRecovery',
-    calculate: false,
-    startPrice: 2500,
-    stepVolumePrice: 0,
-    stepWidthPrice: [{ width: [0], price: 0 }],
-  },
-  {
-    label: 'Холодное восстановление',
-    value: 'coldRecovery',
-    stepVolumePrice: 600,
-    stepWidthPrice: [{ width: [0], price: 0 }],
-    startPrice: 1600,
-    calculate: true,
-  },
-  {
-    label: 'SPA уход',
-    value: 'careSpa',
-    stepVolumePrice: 600,
-    startPrice: 2300,
-    calculate: true,
-    stepWidthPrice: [{ width: [0], price: 0 }],
-  },
-  {
-    label: 'Пилинг кожи головы',
-    value: 'peelingScalp',
-    calculate: false,
-    startPrice: 500,
-    stepVolumePrice: 0,
-    stepWidthPrice: [{ width: [0], price: 0 }],
-  },
-  {
-    label: 'Коллагеновое обёртование',
-    value: 'collagenWrap',
-    stepVolumePrice: 600,
-    stepWidthPrice: [{ width: [0], price: 0 }],
-    startPrice: 1400,
-    calculate: true,
-  },
-  {
-    label: 'Ботокс',
-    value: 'botox',
-    stepVolumePrice: 600,
-    stepWidthPrice: widthPriceStep,
-    startPrice: 2500,
-    calculate: true,
-  },
-  {
-    label: 'Кератиновое выпрямление',
-    value: 'keratinStraighten',
-    stepVolumePrice: 600,
-    stepWidthPrice: widthPriceStep,
-    startPrice: 2800,
-    calculate: true,
-  },
-]
+const selected = computed(() => [
+  ...(main.value ? [main.value] : []),
+  ...addonOptions.value.filter(s => addonNames.value.includes(s.name)),
+])
 
-const getPriceWidth = (width: number): number => {
-  for (const item of widthPriceStep) {
-    const [minWidth, maxWidth] = item.width
-    if (width >= minWidth && width <= maxWidth) {
-      return item.price
+const needsLength = computed(() => selected.value.some(s => s.step > 0))
+
+const lines = computed(() => {
+  const combo = selected.value.length > 1
+  return selected.value.map((s) => {
+    const full = priceAt(s, length.value)
+    const discount = combo ? s.comboDiscount : 0
+    return {
+      name: s.title,
+      byLength: s.step > 0,
+      full,
+      total: Math.round(full * (1 - discount / 100)),
+      discount,
     }
-  }
-  return 0
-}
-
-onMounted(() => {
-  selectedLabel.value = options[0].label
-  selectedValue.value = options[0]
+  })
 })
 
-watch(selectedValue, (newValue) => {
-  if (newValue.calculate) {
-    volumeCalculate.value = true
-    if (newValue.stepWidthPrice[0].price > 0) {
-      widthCalculate.value = true
-    } else {
-      widthCalculate.value = false
-    }
-  } else {
-    volumeCalculate.value = false
-    widthCalculate.value = false
-  }
-})
-
-watch([selectedValue, selectHairVolume, selectHairWidth, isOpen], () => {
-  if (!selectedValue.value.calculate) {
-    constPay.value = selectedValue.value.startPrice
-  } else {
-    let price = selectedValue.value.startPrice
-    if (volumeCalculate.value) {
-      const stepPayVolume = (parseInt(selectHairVolume.value) - 40) / 10
-      price += stepPayVolume * selectedValue.value.stepVolumePrice
-    }
-    if (widthCalculate.value) {
-      const widthPrice = getPriceWidth(parseInt(selectHairWidth.value))
-      price += widthPrice
-    }
-    constPay.value = price
-  }
-})
-
-watch(isOpen, (newValue) => {
-  if (newValue) {
-    resetValues()
-  }
-})
-
-const handleOpen = () => {
-  isOpen.value = !isOpen.value
-}
-
-const resetValues = () => {
-  if (hairVolume.value) {
-    hairVolume.value.value = '30'
-    selectHairVolume.value = '30'
-  }
-  if (hairWidth.value) {
-    hairWidth.value.value = '7'
-    selectHairWidth.value = '7'
-  }
-}
-
-const handleSelectItem = (item: ServiceOption) => {
-  selectedLabel.value = item.label
-  selectedValue.value = item
-  isOpen.value = false
-}
-
-const handleChangeHairVolume = () => {
-  if (hairVolume.value?.value) {
-    selectHairVolume.value = hairVolume.value.value
-  }
-}
-
-const handleChangeHairWidth = () => {
-  if (hairWidth.value?.value) {
-    selectHairWidth.value = hairWidth.value.value
-  }
-}
+const total = computed(() => lines.value.reduce((sum, line) => sum + line.total, 0))
 </script>
 
 <template>
-  <div class="w-full bg-primary py-16" id="calculator-section">
-    <section class="max-w-3xl mx-auto px-4">
-      <h2 v-animate="'fade-in-down'" class="text-title  text-center text-main mb-4 text-xl md:text-3xl lg:text-4xl xl:text-5xl">Примерный расчёт стоимости услуг
-      </h2>
-      <h5 v-animate="{ animation: 'fade-in-up', delay: 100 }" class="text-sm md:text-base lg:text-lg xl:text-xl text-center text-main mb-8">
-        Расчёт в калькуляторе - примерный. Точную стоимость можно узнать после очной коснультации.
-      </h5>
+  <section id="calculator" class="mx-auto max-w-[1240px] px-4 pb-[clamp(80px,9vw,128px)] md:px-12">
+    <div v-animate="'fade-in-up'" class="glass flex flex-wrap overflow-hidden rounded-[clamp(28px,4vw,44px)]">
+      <div class="flex min-w-0 flex-[1_1_560px] flex-col gap-7 p-[clamp(24px,4vw,56px)]">
+        <SectionHeading eyebrow="Калькулятор">
+          Примерный <span class="italic text-rose">расчёт стоимости</span>
+        </SectionHeading>
 
-      <!-- Service selector -->
-      <div v-animate="{ animation: 'fade-in-up', delay: 200 }">
-        <label class="block text-base md:text-lg lg:text-xl text-main mb-2">Выберите услугу:</label>
-        <div
-          class="relative w-full p-4 bg-main border border-text-additional rounded-lg cursor-pointer hover:border-button transition-colors mb-4"
-          @click="handleOpen">
-        <span class="text-text">{{ selectedLabel }}</span>
+        <fieldset class="m-0 flex flex-col gap-3 border-0 p-0">
+          <legend class="mb-3 p-0 text-[13px] font-semibold uppercase tracking-[0.12em] text-mist">Процедура</legend>
+          <div class="flex flex-wrap gap-2.5">
+            <label v-for="s in services" :key="s.name"
+              class="relative inline-flex min-h-11 cursor-pointer items-center rounded-full border px-[18px] text-[15px] font-medium transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-rose"
+              :class="s.name === mainName ? 'border-plum bg-plum text-petal' : 'border-plum/20 bg-white/70 text-plum hover:border-plum'">
+              <input v-model="mainName" type="radio" name="calc-service" :value="s.name" class="sr-only">
+              {{ s.title }}
+            </label>
+          </div>
+        </fieldset>
+
+        <div v-if="needsLength" class="flex flex-col gap-2.5">
+          <label for="calc-length" class="flex justify-between text-[15px] font-semibold">
+            <span>Длина волос</span>
+            <span class="text-rose">{{ length }} см</span>
+          </label>
+          <input id="calc-length" v-model.number="length" type="range" :min="LENGTH_MIN" :max="LENGTH_MAX"
+            :step="LENGTH_STEP" class="range" :style="{ '--fill': lengthFill }">
+          <div aria-hidden="true" class="flex justify-between text-xs text-mist">
+            <span v-for="tick in lengthTicks" :key="tick">{{ tick }}</span>
+          </div>
+        </div>
+
+        <fieldset v-if="addonOptions.length" class="m-0 flex flex-col gap-3 border-0 p-0">
+          <legend class="mb-3 p-0 text-[13px] font-semibold uppercase tracking-[0.12em] text-mist">
+            Добавить к процедуре
+          </legend>
+          <label v-for="s in addonOptions" :key="s.name"
+            class="flex min-h-14 cursor-pointer items-center gap-3.5 rounded-[20px] border px-[18px] py-3 transition-colors"
+            :class="addonNames.includes(s.name) ? 'border-rose bg-rose/5' : 'border-plum/15 bg-white/60 hover:border-plum/40'">
+            <input v-model="addonNames" type="checkbox" :value="s.name" class="h-5 w-5 flex-none accent-rose">
+            <span class="flex flex-1 flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+              <span class="font-semibold">{{ s.title }}</span>
+              <span class="text-sm text-mist">
+                <s>{{ formatPrice(s.price) }}</s>
+                <b class="ml-1.5 font-semibold text-rose">
+                  {{ formatPrice(Math.round(s.price * (1 - s.comboDiscount / 100))) }} · −{{ s.comboDiscount }}%
+                </b>
+              </span>
+            </span>
+          </label>
+        </fieldset>
       </div>
 
-      <!-- Options dropdown -->
-      <ul
-        class="text-sm md:text-base lg:text-lg transition-all duration-300 overflow-hidden bg-main border border-text-additional rounded-lg mb-6"
-        :class="isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 border-0'">
-        <li v-for="(item, index) in options" :key="index" class="p-4 cursor-pointer transition-colors"
-          :class="item.label === selectedLabel ? 'bg-button text-text font-bold' : 'text-text hover:bg-text-additional-400'"
-          @click="handleSelectItem(item)">
-          {{ item.label }}
-        </li>
-      </ul>
+      <div class="relative flex flex-[1_1_340px] flex-col justify-between gap-8 overflow-hidden bg-plum p-[clamp(24px,4vw,56px)] text-petal">
+        <svg aria-hidden="true" viewBox="0 0 400 400" fill="none" stroke="#c9a27e" stroke-width="0.8"
+          class="absolute -right-[120px] -top-[120px] h-[380px] w-[380px] opacity-35">
+          <circle cx="200" cy="200" r="190" />
+          <circle cx="200" cy="200" r="150" />
+          <circle cx="200" cy="200" r="110" />
+        </svg>
 
-      <!-- Hair volume slider -->
-      <div v-if="volumeCalculate" class="mb-6 text-sm md:text-base lg:text-lg">
-        <label class="block text-medium text-main mb-2">Длина волос: {{ selectHairVolume }} см.</label>
-        <input ref="hairVolume" type="range" min="30" max="110" step="10" :value="selectHairVolume"
-          class="w-full h-2 bg-text-additional rounded-lg appearance-none cursor-pointer accent-button"
-          @input="handleChangeHairVolume" />
-      </div>
+        <div class="relative flex flex-col gap-4" aria-live="polite">
+          <span class="text-[13px] font-semibold uppercase tracking-[0.12em] text-rose-light">Примерная стоимость</span>
+          <span class="font-display text-[clamp(52px,6vw,80px)] font-medium leading-none">{{ formatPrice(total) }}</span>
+          <ul class="m-0 flex list-none flex-col gap-2 p-0 text-[15px]">
+            <li v-for="line in lines" :key="line.name" class="flex items-baseline justify-between gap-4 border-b border-petal/15 pb-2">
+              <span>
+                {{ line.name }}<template v-if="line.byLength">, {{ length }} см</template>
+                <span v-if="line.discount" class="ml-1 text-rose-light">−{{ line.discount }}%</span>
+              </span>
+              <span class="whitespace-nowrap font-semibold">{{ formatPrice(line.total) }}</span>
+            </li>
+          </ul>
+        </div>
 
-      <!-- Hair width slider -->
-      <div v-if="widthCalculate" class="mb-6 text-sm md:text-base lg:text-lg">
-        <label class="block text-medium text-main mb-2">Густота волос: {{ selectHairWidth }} см.</label>
-        <input ref="hairWidth" type="range" min="7" max="12" :value="selectHairWidth"
-          class="w-full h-2 bg-text-additional rounded-lg appearance-none cursor-pointer accent-button"
-          @input="handleChangeHairWidth" />
-      </div>
-
-      <!-- Price display -->
-        <div class="text-center mt-8">
-          <span class="text-xl md:text-2xl lg:text-3xl font-bold text-button">От {{ constPay }}₽</span>
+        <div class="relative flex flex-col gap-[18px]">
+          <p class="m-0 text-[15px] leading-relaxed text-petal/80">
+            Расчёт в калькуляторе — примерный. Точную стоимость можно узнать после очной консультации.
+          </p>
+          <a href="tel:89021962407"
+            class="btn-lift inline-flex min-h-[52px] items-center self-start rounded-full bg-petal px-[26px] text-[15px] font-semibold text-plum no-underline">
+            Записаться на консультацию
+          </a>
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </template>
